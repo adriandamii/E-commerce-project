@@ -1,0 +1,10 @@
+.account-purchases {
+    display:flex;
+    margin:10px auto;
+    justify-content: center;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:30px;
+    flex-wrap:wrap;
+
+}

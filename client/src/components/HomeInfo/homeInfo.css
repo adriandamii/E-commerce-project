@@ -1,0 +1,90 @@
+.homepage-information-container {
+  margin:0 auto;
+  min-width:220px;
+  max-width:1220px;
+
+  display: flex;
+  
+}
+
+.homepage-information {
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  height:auto;
+  border: 2px solid rgb(215, 212, 212);
+  justify-content: space-around;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  padding:20px;
+}
+
+.home-delivery,
+.secure-payment {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage-icon {
+  font-size: 40px;
+  color: rgb(32, 42, 60);
+  margin-bottom:15px;
+}
+
+.bold-application {
+  font-weight: 600;
+}
+
+.font-adjust {
+  font-size:13px;
+  color:grey;
+}
+
+.gift-icon {
+  font-size: 47px;
+  color: rgb(32, 42, 60);
+  margin-bottom:10px;
+}
+
+.days-retur {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage-suport {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gift-service {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media only screen and (min-device-width: 251px) and (max-device-width: 726px) and (-webkit-min-device-pixel-ratio: 2) {
+  .homepage-information-container {
+    margin:0 auto;
+    width:100%;
+  }
+  
+  
+  .homepage-information {
+    display: flex;
+    flex-direction: row;
+    max-width:100%;
+    height:auto;
+    flex-wrap:wrap;
+    border: 2px solid rgb(215, 212, 212);
+    justify-content: space-around;
+    padding:20px;
+  }
+}

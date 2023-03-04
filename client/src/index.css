@@ -1,0 +1,88 @@
+/*HEADER MAIN BUTTONS NAVBAR */
+
+
+main {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+
+
+@media only screen and (min-device-width: 1250px) and (-webkit-min-device-pixel-ratio: 2) {
+  .app-container {
+    contain:paint;
+  }
+}
+@media only screen and (max-device-width: 1249px) and (-webkit-min-device-pixel-ratio: 2) {
+  .app-container {
+    width:100%;
+    overflow: hidden;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(17, 9, 40, 0.3);
+  background-color: rgb(17, 9, 40);
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.984);
+}
+
+.main-container,
+main {
+  width: 98%;
+  margin:0 auto;
+  height: fit-content;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.row.center {
+  justify-content: center;
+}
+.row.top {
+  align-items: flex-start;
+}
+.row.start {
+  justify-content: flex-start;
+}
+
+.pagination {
+  margin-top: 10px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  gap:4px;
+  justify-content: center;
+  font-size: larger;
+}
+
+.pagination a {
+  border:2px solid grey;
+  padding:4px;
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  font-weight: bold;
+}
+
+.spinner-loading {
+  margin:10px auto;
+}
+
+
+
+

@@ -1,0 +1,64 @@
+.createProductFormImage > img {
+  width: 6vmax;
+  margin: 0.5vmax 0.5vmax;
+}
+
+label,
+.dropdown {
+  display: block;
+  color: white;
+}
+
+.auto-create-selector {
+  display: flex;
+}
+
+.createProductFormImage {
+  width: 100%;
+  overflow: auto;
+}
+
+.create-form-categories,
+.edit-form-categories,
+.auto-create-selectors,
+.realEstate-create-selectors,
+.electronicsAppliances-create-selectors,
+.fashion-create-selectors,
+.autoParts-create-selectors,
+.momsKids-create-selectors,
+.servicesCompanyEquipment-create-selectors,
+.auto-edit-selectors,
+.realEstate-edit-selectors,
+.electronicsAppliances-edit-selectors,
+.fashion-edit-selectors,
+.autoParts-edit-selectors,
+.momsKids-edit-selectors,
+.servicesCompanyEquipment-edit-selectors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-container,
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-container input {
+  width: 500px;
+  height: 50px;
+}
+
+.title {
+  text-align: center;
+  margin: 10px auto;
+  font-size: 2rem;
+}
+
+.mainCategoryCreate {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,43 @@
+.account-page {
+    margin-top:15px;
+    display:flex;
+    flex-direction: column;
+    gap:30px;
+}
+ 
+  .account-list-details {
+    width:400px;
+    list-style-type: none;
+    border: 1px solid rgb(223, 219, 219);
+    padding-left:0;
+  }
+
+  .account-list-details li {
+    display: flex;
+    gap:10px;
+    padding:8px 0 8px 12px;
+    font-size: large;
+    border-bottom: 1px solid rgb(223, 219, 219);
+    border-top: 1px solid rgb(223, 219, 219);
+  }
+
+  .account-list-details li:hover, .account-list-details link:hover, .account-list-details li:active, .account-list-details link:active {
+    background-color: rgb(32, 42, 60);
+    color:  white;
+  }
+
+  
+
+  .small-logo {
+    font-size: medium;
+    font-weight: 1800;
+  }
+ 
+  @media only screen and (min-device-width: 251px) and (max-device-width: 401px) and (-webkit-min-device-pixel-ratio: 2) {
+    .account-page {
+        width:100%;
+    }
+    .account-list-details {
+        width:100%;
+      }
+}

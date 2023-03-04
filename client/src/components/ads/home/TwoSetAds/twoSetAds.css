@@ -1,0 +1,57 @@
+.two-set-ads {
+  display: flex;
+  flex-direction: row;
+  gap: 26.5px;
+  width: 1220;
+  height: 230px;
+  justify-content: center;
+  margin: 25px auto;
+}
+
+.two-ads {
+  width: 600px;
+  height: 230px;
+}
+
+.two-ads img {
+  width: 600px;
+  height: 230px;
+  object-fit: cover;
+}
+
+@media only screen and (min-device-width: 200px) and (max-device-width: 955px) and (-webkit-min-device-pixel-ratio: 2) {
+  .two-set-ads {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .two-ads,
+  .two-ads img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media only screen and (min-device-width: 956px) and (max-device-width: 1242px) and (-webkit-min-device-pixel-ratio: 2) {
+  .two-set-ads {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .two-ads {
+    width: 40%;
+    height: 40%;
+  }
+  .two-ads img {
+    width: 100%;
+    height: 100%;
+  }
+}
