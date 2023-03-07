@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json({}));
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://mq-market-classic.onrender.com'],
+    origin: ['http://localhost:3000', 'https://market-place-project.onrender.com'],
     methods: "GET, POST, PUT, DELETE"
   })
 );
