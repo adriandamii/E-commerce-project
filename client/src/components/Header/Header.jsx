@@ -6,7 +6,6 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { mainCategoryArr } from '../../utils';
 import SearchBox from '../SearchBox';
-import logodark from '../../data/logo-black.png';
 import './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../actions/userActions';
@@ -17,7 +16,6 @@ const Header = (props) => {
 
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
-  const {countCartItems} = props;
   const signoutHandler = () => {
     dispatch(signout());
   };
