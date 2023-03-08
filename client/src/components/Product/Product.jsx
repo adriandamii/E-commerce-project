@@ -68,7 +68,7 @@ const Product = (props) => {
   );
 
   const productObject = {
-    im: product?.images?.[0],
+    im: product?.images?.[0].url,
     id: product?._id,
     name: product?.name,
     value: product?.price,
@@ -101,21 +101,23 @@ const Product = (props) => {
       <strong>Description:</strong> <p className='short-description'>{product.description}</p>
       <div className='d-flex'>
 
-      {/* <BiTrash onClick={() => deleteHandler(product)} />
+      <BiTrash onClick={() => deleteHandler(product)} />
       <BiPencil
         onClick={() =>
           navigate(`/${product._id}/editProduct/${product.mainCategory}`)
         }
-      /> */}
+      />
       <Button variant="secondary" onClick={() => setShow(true)}>
         see details
       </Button>
-      <div>
+      <div className="modal-dark-light">
         <Modal show={show} onHide={() => setShow(false)} size="xl">
           <Modal.Header closeButton>
             <Modal.Title style={{ color: 'black' }}>{product.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ color: 'black' }}>
+            <div className='modal-seedetails'>
+
             <Carousel variant="dark">
               {product.images.map((img, index) => (
                 <Carousel.Item className="slide-show-image" key={index}>
@@ -123,28 +125,28 @@ const Product = (props) => {
                 </Carousel.Item>
               ))}
             </Carousel>
-            <p>{product.description}</p>
-
             <div className="prices">
               <h3>
                 <img src={euro} alt="" /> {product.price}
               </h3>
             </div>
+            
             <ProductSpecifications product={product} />
+            </div>
           </Modal.Body>
         </Modal>
       </div>
       <Button
         variant="warning"
-        // onClick={() => {
-        //   dispatch(
-        //     addItemShoppingBasket({
-        //       type: findItem ? 'addQuantity' : 'addItem',
-        //       payload: productObject,
-        //     })
-        //     );
-        //     setIsOpen(true);
-        //   }}
+        onClick={() => {
+          dispatch(
+            addItemShoppingBasket({
+              type: findItem ? 'addQuantity' : 'addItem',
+              payload: productObject,
+            })
+            );
+            setIsOpen(true);
+          }}
           >
         Add to cart
       </Button>

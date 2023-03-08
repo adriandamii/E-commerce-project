@@ -639,7 +639,7 @@ router.post('/', isAuth, isSellerOrAdmin, upload, async (req, res) => {
   }
 });
 
-router.delete('/:id', isAuth, isSellerOrAdmin, async (req, res) => {
+router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   for (let i = 0; i < product.images.length; i++) {

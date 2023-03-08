@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Carousel, Modal } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
+  createProduct,
   deleteProduct,
   getProducts,
 } from '../../../actions/productAction';
 import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import {
+  PRODUCT_CREATE_RESET,
   PRODUCT_DELETE_RESET,
 } from '../../../constants/productConstants';
-import ProductSpecifications from '../../../components/Product Details/ProductSpecifications';
-import euro from '../../../data/euro.png';
-import { BiPencil, BiTrash } from 'react-icons/bi';
-import { RxHamburgerMenu } from 'react-icons/rx';
-import './productListPage.css';
-
-
 
 export default function ProductListScreen(props) {
   const navigate = useNavigate();
   const { pageNumber = 1 } = useParams();
   const { pathname } = useLocation();
-  const [show, setShow] = useState(false);
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const productsList = useSelector((state) => state.productsList);
   const { loading, error, products, page, pages } = productsList;
+console.log("product" , productsList)
+  // const createdProduct = useSelector((state) => state.createdProduct);
+  // const {
+  //   loading: loadingCreate,
+  //   error: errorCreate,
+  //   success: successCreate,
+  //   product: created,
+  // } = createdProduct;
 
   const deletedProduct = useSelector((state) => state.deletedProduct);
   const {
@@ -38,6 +40,7 @@ export default function ProductListScreen(props) {
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
+   
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
@@ -45,9 +48,11 @@ export default function ProductListScreen(props) {
       getProducts({ seller: sellerMode ? userInfo._id : '', pageNumber })
     );
   }, [
+    //createdProduct,
     dispatch,
     navigate,
     sellerMode,
+    //successCreate,
     successDelete,
     userInfo._id,
     pageNumber,
@@ -58,19 +63,14 @@ export default function ProductListScreen(props) {
     }
   };
   const createHandler = () => {
-    navigate('/createProduct');
+    navigate("/createProduct")
   };
 
   return (
     <div>
-      <div>
+      <div className="row">
         <h1>Products</h1>
-        <Button
-          variant="info"
-          type="button"
-          className="primary"
-          onClick={createHandler}
-        >
+        <Button variant="info" type="button" className="primary" onClick={createHandler}>
           Create Product
         </Button>
       </div>
@@ -87,10 +87,10 @@ export default function ProductListScreen(props) {
           <table className="table">
             <thead>
               <tr>
-                <th className='id-product'>ID</th>
+                <th>ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
-                <th className='category-productlist'>CATEGORY</th>
+                <th>CATEGORY</th>
                 {/* <th>SELLER</th> */}
                 <th>ACTIONS</th>
               </tr>
@@ -98,75 +98,34 @@ export default function ProductListScreen(props) {
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td className='id-product'>{product._id}</td>
+                  <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
-                  <td className='category-productlist'>{product.category}</td>
+                  <td>{product.category}</td>
                   {/* <td>{product.seller.seller.name}</td> */}
 
+
                   <td>
-                    <div className="actions">
-                      <RxHamburgerMenu
-                        type="button"
-                        onClick={() => setShow(true)}
-                      />
-                      <div className='details-modal'>
-                        <Modal
-                          show={show}
-                          onHide={() => setShow(false)}
-                          size="xl"
-                        >
-                          <Modal.Header closeButton>
-                            <Modal.Title style={{ color: 'black' }}>
-                              {product.name}
-                            </Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body style={{ color: 'black' }} className='modal-seedetails'>
-                            
-                              <Carousel variant="dark">
-                                {product.images.map((img, index) => (
-                                  <Carousel.Item
-                                    className="slide-show-image"
-                                    key={index}
-                                  >
-                                    <img
-                                      className="ad-image"
-                                      src={img.url}
-                                      alt={img}
-                                    />
-                                  </Carousel.Item>
-                                ))}
-                              </Carousel>
-                                <p>{product.description}</p>
-                              <div className="prices">
-                                <h3>
-                                  <img src={euro} alt="" /> {product.price}
-                                </h3>
-                              </div>
-                              <ProductSpecifications product={product} />
-                            
-                          </Modal.Body>
-                        </Modal>
-                      </div>
-                      <BiPencil
-                        type="button"
-                        onClick={() =>
-                          navigate(
-                            `/${product._id}/editProduct/${product.mainCategory}`
-                          )
-                        }
-                      />
-                      <BiTrash
-                        type="button"
-                        onClick={() => deleteHandler(product)}
-                      />
-                    </div>
+                    <button
+                      type="button"
+                      className="small"
+                      onClick={() => navigate(`/product/${product._id}/edit`)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="small"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className="pagination">
+          <div className="row center pagination">
             {[...Array(pages).keys()].map((x) => (
               <Link
                 className={x + 1 === page ? 'active' : ''}
