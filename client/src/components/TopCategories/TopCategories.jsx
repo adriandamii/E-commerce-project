@@ -17,42 +17,42 @@ const TopCategories = () => {
         <div className="categories">
           <div className="category-home electronics-margin">
             <Link to={`/filters/mainCategory/electronicsAppliances/category/TV/subCategory/TV`} style={{color:'grey'}}>
-              <img src={electronic} alt="" /> <div>Electronics</div>
+              <img src={electronic} alt="" /> <p>Electronics</p>
             </Link>
           </div>
           <div className="category-home">
             <Link to={`/filters/mainCategory/fashion`} style={{color:'grey'}}>
-              <img src={fashion} alt="" /> <div>Clothing</div>
+              <img src={fashion} alt="" /> <p>Clothing</p>
             </Link>
           </div>
           <div className="category-home laptop-margin">
             <Link to={`/filters/mainCategory/electronicsAppliances/category/laptopPcGaming/subCategory/laptop`} style={{color:'grey'}}>
-              <img src={laptop} alt="" /> <div>Laptops</div>
+              <img src={laptop} alt="" /> <p>Laptops</p>
             </Link>
           </div>
           <div className="category-home">
             <Link to={`/filters/mainCategory/houseAndGarden/category/furnitureDecorations/subCategory/kitchen`} style={{color:'grey'}}>
-              <img src={kitchen} alt="" /> <div>Home & Kitchen</div>
+              <img src={kitchen} alt="" /> <p>Home & Kitchen</p>
             </Link>
           </div>
           <div className="category-home beauty-margin">
             <Link to={`/filters/mainCategory/servicesCompanyEquipment/category/beautyServices`} style={{color:'grey'}}>
-              <img src={beauty} alt="" /> <div>Beauty & Health</div>
+              <img src={beauty} alt="" /> <p>Beauty & Health</p>
             </Link>
           </div>
           <div className="category-home">
             <Link to={`/filters/mainCategory/fashion/category/watches`} style={{color:'grey'}}>
-              <img src={whatch} alt="" /> <div>Whatches</div>
+              <img src={whatch} alt="" /> <p>Whatches</p>
             </Link>
           </div>
           <div className="category-home toys-margin">
             <Link to={`/filters/mainCategory/electronicsAppliances`} style={{color:'grey'}}>
-              <img src={technologyToy} alt="" /> <div>Technology Toys</div>
+              <img src={technologyToy} alt="" /> <p>Technology Toys</p>
             </Link>
           </div>
           <div className="category-home">
             <Link to={`/filters/mainCategory/electronicsAppliances/category/phones`} style={{color:'grey'}}>
-              <img src={phone} alt="" /> <div>Phones</div>
+              <img src={phone} alt="" /> <p>Phones</p>
             </Link>
           </div>
         </div>

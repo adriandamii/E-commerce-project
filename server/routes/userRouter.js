@@ -165,7 +165,7 @@ userRouter.post(
         process.env.JWT_SECRET || 'somethingsecret',
         { expiresIn: '20m' }
       );
-      let activationUrl = `https://market-place-project.onrender.com/authentication/activate/${token}`;
+      let activationUrl = `http://localhost:3000/authentication/activate/${token}`;
       const mail = `
           <p> Hello ${registerUsername}, </p>
           <p>Welcome to Nodemailer</p>

@@ -63,14 +63,7 @@ export default function UserListScreen(props) {
                 <td>{user.isSeller ? 'YES' : ' NO'}</td>
                 <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
-                <button
-                    type="button"
-                    className="small"
-                    //onClick={() => navigate(`/user/${user._id}/edit`)}
-                    onClick={() => navigate(`/productlist/${user._id}`)}
-                  >
-                    Products
-                  </button>
+                
                   <button
                     type="button"
                     className="small"
