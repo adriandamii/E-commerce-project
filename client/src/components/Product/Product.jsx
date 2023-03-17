@@ -101,12 +101,12 @@ const Product = (props) => {
       <strong>Description:</strong> <p className='short-description'>{product.description}</p>
       <div className='d-flex'>
 
-      <BiTrash onClick={() => deleteHandler(product)} />
+      {/* <BiTrash onClick={() => deleteHandler(product)} />
       <BiPencil
         onClick={() =>
           navigate(`/${product._id}/editProduct/${product.mainCategory}`)
         }
-      />
+      /> */}
       <Button variant="secondary" onClick={() => setShow(true)}>
         see details
       </Button>
@@ -136,7 +136,7 @@ const Product = (props) => {
           </Modal.Body>
         </Modal>
       </div>
-      <Button
+      {/* <Button
         variant="warning"
         onClick={() => {
           dispatch(
@@ -149,7 +149,7 @@ const Product = (props) => {
           }}
           >
         Add to cart
-      </Button>
+      </Button> */}
       </div>
       {/* <button className="popular-category-button" onClick={(e) => setPromoteProduct(current => [...current, product])}>
         Promote
