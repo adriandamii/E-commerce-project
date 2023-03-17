@@ -5,6 +5,7 @@ const { User } = require('../models/userModel.js');
 const { generateToken, isAdmin, isAuth } = require('../utils.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const crypto = require("crypto");
 
 const userRouter = express.Router();
 
@@ -82,6 +83,8 @@ let transporter = nodemailer.createTransport({
 });
 
 const multer = require('multer');
+const ErrorHandler = require('../utils/errorhander.js');
+const sendToken = require('../utils/jwtToken.js');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -108,6 +111,86 @@ const upload = multer({
   },
   fileFilter: fileFilter,
 });
+
+userRouter.post("/password/forgot", expressAsyncHandler(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(new ErrorHandler("User not found", 404));
+  }
+
+  // Get ResetPassword Token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  const resetPasswordUrl = `http://localhost:3000/password/reset/${resetToken}`;
+
+  const mail = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+
+  try {
+    let mailOptions = {
+      from: '"NodeMailer" <adriandamiii@gmail.com>',
+      to: user.email,
+      subject: 'Forgot Password',
+      html: mail,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({ validateBeforeSave: false });
+
+    return next(new ErrorHandler(error.message, 500));
+  }
+})
+);
+// Reset Password
+userRouter.put("/password/reset/:token", expressAsyncHandler(async (req, res, next) => {
+  // creating token hash
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        "Reset Password Token is invalid or has been expired",
+        400
+      )
+    );
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not password", 400));
+  }
+
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+
+  sendToken(user, 200, res);
+})
+);
+
 
 userRouter.post(
   '/register',
@@ -165,10 +248,11 @@ userRouter.post(
         process.env.JWT_SECRET || 'somethingsecret',
         { expiresIn: '20m' }
       );
+      let activationDeployTest = `https://market-place-project-8bem.onrender.com/authentication/activate/${token}`;
       let activationUrl = `http://localhost:3000/authentication/activate/${token}`;
       const mail = `
           <p> Hello ${registerUsername}, </p>
-          <p>Welcome to Nodemailer</p>
+          <p>Welcome to the Adrian's Market</p>
           <h3>Please click on given link to activate your account</h3>
           <a
                   class="reset-btn"
@@ -179,14 +263,14 @@ userRouter.post(
                     text-transform: uppercase;
                   "
                   target="blank"
-                  href="${activationUrl}"
+                  href="${activationDeployTest}"
                 >
                   Activation Link
                 </a>     
           `;
 
       let mailOptions = {
-        from: '"NodeMailer" <adriandamiii@gmail.com>',
+        from: '"E-commerce Project" <adriandamiii@gmail.com>',
         to: registerEmail,
         subject: 'Account Activation',
         html: mail,
