@@ -62,7 +62,7 @@ const MainListInfo = (props) => {
             Transactions
           </li>
         </Link>
-        <Link
+        {/* <Link
           to={'/kyc'}
           style={{ textDecoration: 'none', color: 'black' }}
         >
@@ -70,7 +70,7 @@ const MainListInfo = (props) => {
             <FaSearchPlus />
             KYC (Know your customer)
           </li>
-        </Link>
+        </Link> */}
         <Link
           to={'/help'}
           style={{ textDecoration: 'none', color: 'black' }}
@@ -80,7 +80,7 @@ const MainListInfo = (props) => {
             Help/Contact Us
           </li>
         </Link>
-        <Link
+        {/* <Link
           to={'/profile'}
           style={{ textDecoration: 'none', color: 'black' }}
         >
@@ -88,7 +88,7 @@ const MainListInfo = (props) => {
             <FaCartArrowDown />
             Become a Seller
           </li>
-        </Link>
+        </Link> */}
         <Link
           to="#signout"
           style={{ textDecoration: 'none', color: 'black' }}

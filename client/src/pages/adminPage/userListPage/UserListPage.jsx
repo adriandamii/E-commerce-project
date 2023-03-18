@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { BiPencil, BiTrash } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser, listUsers } from '../../../actions/userActions';
 import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { USER_DETAILS_RESET } from '../../../constants/userConstants';
+import './userListPage.css';
 
 export default function UserListScreen(props) {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ export default function UserListScreen(props) {
     }
   };
   return (
-    <div>
+    <div className='main-listusers'>
       <h1>Users</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
@@ -46,38 +48,31 @@ export default function UserListScreen(props) {
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>NAME</th>
+              <th className="userlist-id">ID</th>
+              <th className="name-id">NAME</th>
               <th>EMAIL</th>
-              <th>IS SELLER</th>
-              <th>IS ADMIN</th>
+              <th className='userlist-isSeller'>IS SELLER</th>
+              <th className='userlist-isAdmin'>IS ADMIN</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
+                <td className="userlist-id">{user._id}</td>
+                <td className="name-id">{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.isSeller ? 'YES' : ' NO'}</td>
-                <td>{user.isAdmin ? 'YES' : 'NO'}</td>
+                <td className='userlist-isSeller'>{user.isSeller ? 'YES' : ' NO'}</td>
+                <td className='userlist-isAdmin'>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
-                
-                  <button
-                    type="button"
-                    className="small"
+                  <BiPencil
+                    className="icon-size"
                     onClick={() => navigate(`/user/${user._id}/edit`)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className="small"
+                  />
+                  <BiTrash
+                    className="icon-size"
                     onClick={() => deleteHandler(user)}
-                  >
-                    Delete
-                  </button>
+                  />
                 </td>
               </tr>
             ))}

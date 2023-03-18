@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { BiPencil, BiTrash } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -13,6 +14,7 @@ import {
   PRODUCT_CREATE_RESET,
   PRODUCT_DELETE_RESET,
 } from '../../../constants/productConstants';
+import './productListPage.css';
 
 export default function ProductListScreen(props) {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ export default function ProductListScreen(props) {
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const productsList = useSelector((state) => state.productsList);
   const { loading, error, products, page, pages } = productsList;
-console.log("product" , productsList)
+
   // const createdProduct = useSelector((state) => state.createdProduct);
   // const {
   //   loading: loadingCreate,
@@ -40,7 +42,6 @@ console.log("product" , productsList)
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
-   
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
@@ -63,16 +64,23 @@ console.log("product" , productsList)
     }
   };
   const createHandler = () => {
-    navigate("/createProduct")
+    navigate('/createProduct');
   };
 
   return (
-    <div>
+    <div className='main-product-list'>
       <div className="row">
         <h1>Products</h1>
-        <Button variant="info" type="button" className="primary" onClick={createHandler}>
-          Create Product
-        </Button>
+        <div>
+          <Button
+            variant="info"
+            type="button"
+            className="primary"
+            onClick={createHandler}
+          >
+            Create Product
+          </Button>
+        </div>
       </div>
 
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -87,10 +95,10 @@ console.log("product" , productsList)
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th className="productlist-id">ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
-                <th>CATEGORY</th>
+                <th className="category-productlist">CATEGORY</th>
                 {/* <th>SELLER</th> */}
                 <th>ACTIONS</th>
               </tr>
@@ -98,34 +106,30 @@ console.log("product" , productsList)
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td>{product._id}</td>
+                  <td className="productlist-id">{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
-                  <td>{product.category}</td>
+                  <td className="category-productlist">{product.category}</td>
                   {/* <td>{product.seller.seller.name}</td> */}
 
+                  <td className="actions">
 
-                  <td>
-                    <button
-                      type="button"
-                      className="small"
-                      onClick={() => navigate(`/product/${product._id}/edit`)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="small"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </button>
+                  <BiPencil
+                  className="icon-size"
+                    onClick={() =>
+                      navigate(
+                        `/${product._id}/editProduct/${product.mainCategory}`
+                      )
+                    }
+                  />
+                  &nbsp;&nbsp;
+                    <BiTrash className="icon-size" onClick={() => deleteHandler(product)} />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className="row center pagination">
+          <div className="pagination">
             {[...Array(pages).keys()].map((x) => (
               <Link
                 className={x + 1 === page ? 'active' : ''}

@@ -1,0 +1,34 @@
+.icon-size {
+    font-size: 20px;
+}
+
+
+@media only screen and (min-device-width: 200px) and (max-device-width: 700px) and (-webkit-min-device-pixel-ratio: 2) {
+    .userlist-id {
+        display:none;
+    }
+}
+
+@media only screen and (min-device-width: 200px) and (max-device-width: 458px) and (-webkit-min-device-pixel-ratio: 2) {
+    .name-id {
+        display:none;
+    }
+}
+
+@media only screen and (min-device-width: 200px) and (max-device-width: 390px) and (-webkit-min-device-pixel-ratio: 2) {
+    .userlist-isAdmin {
+        display:none;
+    }
+}
+@media only screen and (min-device-width: 200px) and (max-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+    .userlist-isSeller {
+        display:none;
+    }
+}
+
+@media only screen and (min-device-width: 1301px)  and (-webkit-min-device-pixel-ratio: 2) {
+    .main-listusers {
+      width: 1300px;
+      margin: 0 auto;
+    }
+  }

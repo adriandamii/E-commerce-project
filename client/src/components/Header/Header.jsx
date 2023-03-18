@@ -12,22 +12,35 @@ import { signout } from '../../actions/userActions';
 
 const Header = (props) => {
   const userSignin = useSelector((state) => state.userSignin);
-  const shoppingBasketList = useSelector((state) => state.addItemShoppingBasket)
+  const shoppingBasketList = useSelector(
+    (state) => state.addItemShoppingBasket
+  );
 
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
   };
- 
-  const countProducts =  shoppingBasketList?.map?.((item) => item?.quantity)?.reduce((prev , curr) => prev + curr , 0)
+
+  const countProducts = shoppingBasketList
+    ?.map?.((item) => item?.quantity)
+    ?.reduce((prev, curr) => prev + curr, 0);
 
   return (
     <header>
       <div className="main-nav">
         <div className="first-nav">
           <div className="logo-position">
-            <Link to="/" style={{ textDecoration: 'none', color:"white", fontFamily:"sans-serif", fontWeight:'bold', fontSize:"40px" }}>
+            <Link
+              to="/"
+              style={{
+                textDecoration: 'none',
+                color: 'white',
+                fontFamily: 'sans-serif',
+                fontWeight: 'bold',
+                fontSize: '40px',
+              }}
+            >
               MARKET
             </Link>
           </div>
@@ -45,28 +58,66 @@ const Header = (props) => {
                 0
               </Badge>
             </div>
-            <div className='all-categories'>
+            <div className="all-categories">
               <Link to={'/category'}>
-              <RxHamburgerMenu className="third-logo"style={{color:'white'}}/>
+                <RxHamburgerMenu
+                  className="third-logo"
+                  style={{ color: 'white' }}
+                />
               </Link>
             </div>
             <div className="main-nav-shop-logo">
               <Link to={'/Cart'} style={{ textDecoration: 'none' }}>
-                <CiShoppingBasket className="second-logo" style={{color:'white'}}/>
-                { shoppingBasketList?.length ? (
-                    <Badge pill bg="success">
-                      {countProducts}
-                    </Badge>
+                <CiShoppingBasket
+                  className="second-logo"
+                  style={{ color: 'white' }}
+                />
+                {shoppingBasketList?.length ? (
+                  <Badge pill bg="success">
+                    {countProducts}
+                  </Badge>
                 ) : (
-                    <Badge pill bg="danger">
-                     0
-                    </Badge>
+                  <Badge pill bg="danger">
+                    0
+                  </Badge>
                 )}
               </Link>
-
             </div>
             <div className="main-nav-user-logo">
-              <CiUser className="forth-logo" />
+              {userInfo && userInfo.isAdmin && (
+                <Link to={'/adminpage'} style={{ textDecoration: 'none' }}>
+                  <CiUser className="forth-logo" style={{color:"white"}}/>
+                </Link>
+              )}
+              {userInfo && userInfo.isSeller && !userInfo.isAdmin && (
+                <Link
+                  to={'/seller/accountInfo'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <CiUser className="forth-logo" style={{color:"white"}}/>
+                </Link>
+              )}
+              {userInfo && userInfo.isSeller && !userInfo.isAdmin && (
+                <Link
+                  to={'/client/accountInfo'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <CiUser className="forth-logo" style={{color:"white"}} />
+                </Link>
+              )}
+              {!userInfo && (
+                <Link to={'/signin'} style={{ textDecoration: 'none' }}>
+                  <CiUser className="forth-logo" style={{color:"white"}}/>
+                </Link>
+              )}
+              {userInfo && !userInfo.isSeller && !userInfo.isAdmin && (
+                <Link
+                  to={'/client/accountInfo'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <CiUser className="forth-logo" style={{color:"white"}}/>
+                </Link>
+              )}
               <div className="login-register">
                 {userInfo && userInfo.isAdmin && (
                   <>
@@ -84,7 +135,10 @@ const Header = (props) => {
                 )}
                 {userInfo && userInfo.isSeller && !userInfo.isAdmin && (
                   <>
-                    <Link to={'/seller/accountInfo'} style={{ textDecoration: 'none' }}>
+                    <Link
+                      to={'/seller/accountInfo'}
+                      style={{ textDecoration: 'none' }}
+                    >
                       <div>{userInfo.name}</div>
                     </Link>
                     <Link
@@ -108,9 +162,12 @@ const Header = (props) => {
                 )}
                 {userInfo && !userInfo.isSeller && !userInfo.isAdmin && (
                   <>
-                     <Link to={'/client/accountInfo'} style={{ textDecoration: 'none' }}> 
+                    <Link
+                      to={'/client/accountInfo'}
+                      style={{ textDecoration: 'none' }}
+                    >
                       <div>{userInfo.name}</div>
-                     </Link> 
+                    </Link>
                     <Link
                       to="#signout"
                       style={{ textDecoration: 'none' }}

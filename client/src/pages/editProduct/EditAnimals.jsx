@@ -60,6 +60,7 @@ const EditAnimals = (props) => {
       setSubCategory(product.subCategory);
       setPrice(product.price);
       setDescription(product.description);
+      setOldImages(product.images);
     }
   }, [product, dispatch, id, successUpdate, navigate, errorUpdate]);
 
@@ -237,6 +238,7 @@ const EditAnimals = (props) => {
           size="large"
           color="secondary"
           type="submit"
+          className='mb-4'
           disabled={loadingUpdate ? true : false}
         >
           Update

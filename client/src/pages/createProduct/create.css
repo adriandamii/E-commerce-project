@@ -62,3 +62,20 @@ label,
 .mainCategoryCreate {
   margin-bottom: 20px;
 }
+
+
+@media only screen and (min-device-width: 200px) and (max-device-width: 520px) and (-webkit-min-device-pixel-ratio: 2) {
+  .form-container {
+    width:99%;
+    margin:0 auto;
+
+  }
+  .form-container input {
+    width:99%;
+    margin:0 auto;
+
+  }
+  .mainCategoryCreate {
+    margin:5px auto;
+  }
+}

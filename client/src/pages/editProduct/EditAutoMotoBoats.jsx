@@ -437,7 +437,7 @@ const EditAutoMotoBoats = (props) => {
               </div>
             </div>
           </section>
-          <section className="mainCategory">
+          <section className="mainCategoryCreate">
             <label className="mb-1">Fuel</label>
             <div className="dropdown" controlid="mainCategory">
               <button className="dropbtn" type="button">
@@ -518,6 +518,7 @@ const EditAutoMotoBoats = (props) => {
           size="large"
           color="secondary"
           type="submit"
+          className='mb-4'
           disabled={loadingUpdate ? true : false}
         >
           Update

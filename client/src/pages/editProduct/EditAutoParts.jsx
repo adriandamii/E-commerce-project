@@ -18,6 +18,7 @@ import {
   rimSizeArray,
   rimTypeArray,
   tireProfileArray,
+  tireSeasonArray,
   tireSizeArray,
   tireWidthArray,
   useArray,
@@ -280,15 +281,6 @@ const EditAutoParts = (props) => {
               <img key={index} src={image.url} alt="Old Product Preview" />
             ))}
         </div>
-        <Form.Group className="mb-3" controlId="condition">
-          <Form.Label>Condition</Form.Label>
-          <Form.Control
-            name="condition"
-            value={condition}
-            onChange={(e) => setCondition(e.target.value)}
-            required
-          />
-        </Form.Group>
         {mainCategory === 'autoParts' && (
           <div className="autoParts-edit-selectors">
             {category === 'wheelsRimsTires' && (
@@ -424,6 +416,31 @@ const EditAutoParts = (props) => {
             )}
             {subCategory === 'tires' && (
               <>
+              <section className="mainCategoryCreate">
+                  <label className="mb-1">Season</label>
+                  <div className="dropdown" controlid="season">
+                    <button className="dropbtn" type="button">
+                      {addUpperSpace(season)}
+                      <span>
+                        <BiChevronDown className="icon-style" />
+                      </span>
+                    </button>
+                    <div className="dropdown-content">
+                      {tireSeasonArray.map((b, index) => (
+                        <Link
+                          key={index}
+                          to={`/${id}/editProduct/autoParts`}
+                          onClick={() => {
+                            setSeason(b);
+                          }}
+                          style={{ textDecoration: 'none' }}
+                        >
+                          {addUpperSpace(b)}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </section>
                 <section className="mainCategoryCreate">
                   <label className="mb-1">Tire Size</label>
                   <div className="dropdown" controlid="mainCategory">
@@ -587,6 +604,7 @@ const EditAutoParts = (props) => {
           size="large"
           color="secondary"
           type="submit"
+          className='mb-4'
           disabled={loadingUpdate ? true : false}
         >
           Update

@@ -699,6 +699,7 @@ const EditElectronicsAppliances = (props) => {
           size="large"
           color="secondary"
           type="submit"
+          className='mb-4'
           disabled={loadingUpdate ? true : false}
         >
           Update

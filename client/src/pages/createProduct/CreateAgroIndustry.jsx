@@ -31,7 +31,6 @@ export default function CreateAgroIndustry(props) {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [condition, setCondition] = useState('');
-
   const [categoryArray, setCategoryArray] = useState([]);
   const [subCategoryArray, setSubCategoryArray] = useState([]);
   const [mainCategorySelect, setMainCategorySelect] = useState('agroIndustry');
@@ -63,6 +62,7 @@ export default function CreateAgroIndustry(props) {
       createToastFail();
     }
   }, [successCreate, errorCreate, maxLimit, dispatch, navigate]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -293,14 +293,28 @@ export default function CreateAgroIndustry(props) {
           ))}
         </div>
         {loadingCreate && <LoadingBox></LoadingBox>}
-        <Button
-          size="large"
-          color="secondary"
-          type="submit"
-          disabled={loadingCreate ? true : false}
-        >
-          Create
-        </Button>
+        {imagesPreview.length === 0 ? (
+          <>
+            <p>Please upload images to create a product!</p>
+            <Button
+              color="secondary"
+              className="mb-4"
+              disabled={loadingCreate ? true : false}
+            >
+              Create
+            </Button>
+          </>
+        ) : (
+          <Button
+            size="large"
+            color="secondary"
+            type="submit"
+            className="mb-4 mt-3"
+            disabled={loadingCreate ? true : false}
+          >
+            Create
+          </Button>
+        )}
       </Form>
     </div>
   );

@@ -752,14 +752,28 @@ export default function CreateElectronicsAppliances(props) {
           </div>
         )}
         {loadingCreate && <LoadingBox></LoadingBox>}
-        <Button
-          size="large"
-          color="secondary"
-          type="submit"
-          disabled={loadingCreate ? true : false}
-        >
-          Create
-        </Button>
+        {imagesPreview.length === 0 ? (
+          <>
+            <p>Please upload images to create a product!</p>
+            <Button
+              color="secondary"
+              className="mb-4"
+              disabled={loadingCreate ? true : false}
+            >
+              Create
+            </Button>
+          </>
+        ) : (
+          <Button
+            size="large"
+            color="secondary"
+            type="submit"
+            className="mb-4 mt-3"
+            disabled={loadingCreate ? true : false}
+          >
+            Create
+          </Button>
+        )}
       </Form>
     </div>
   );

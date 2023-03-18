@@ -442,7 +442,7 @@ export default function CreateAutoParts(props) {
             )}
             {subCategorySelect === 'tires' && (
               <>
-                <section className="season">
+                <section className="mainCategoryCreate">
                   <label className="mb-1">Season</label>
                   <div className="dropdown" controlid="season">
                     <button className="dropbtn" type="button">
@@ -526,7 +526,7 @@ export default function CreateAutoParts(props) {
                   <div className="dropdown" controlid="mainCategory">
                     <button className="dropbtn" type="button">
                       {tireProfile === ''
-                        ? 'Select TireP rofile'
+                        ? 'Select Tire Profile'
                         : addUpperSpace(tireProfile)}
                       <span>
                         <BiChevronDown className="icon-style" />
@@ -636,14 +636,28 @@ export default function CreateAutoParts(props) {
           </div>
         )}
         {loadingCreate && <LoadingBox></LoadingBox>}
-        <Button
-          size="large"
-          color="secondary"
-          type="submit"
-          disabled={loadingCreate ? true : false}
-        >
-          Create
-        </Button>
+        {imagesPreview.length === 0 ? (
+          <>
+            <p>Please upload images to create a product!</p>
+            <Button
+              color="secondary"
+              className="mb-4"
+              disabled={loadingCreate ? true : false}
+            >
+              Create
+            </Button>
+          </>
+        ) : (
+          <Button
+            size="large"
+            color="secondary"
+            type="submit"
+            className="mb-4 mt-3"
+            disabled={loadingCreate ? true : false}
+          >
+            Create
+          </Button>
+        )}
       </Form>
     </div>
   );

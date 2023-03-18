@@ -1,12 +1,15 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { detailsUser, updateUser } from '../../../actions/userActions';
 import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { USER_UPDATE_RESET } from '../../../constants/userConstants';
+import './userEditPage.css';
+
 
 export default function UserEditScreen(props) {
   const navigate = useNavigate();
@@ -50,7 +53,7 @@ export default function UserEditScreen(props) {
     dispatch(updateUser({ _id: userId, name, email, isSeller, isAdmin }));
   };
   return (
-    <div>
+    <div className="form">
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit User {name}</h1>
@@ -104,9 +107,9 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <button type="submit" className="primary">
+              <Button type="submit" className="primary" variant="dark">
                 Update
-              </button>
+              </Button>
             </div>
           </>
         )}

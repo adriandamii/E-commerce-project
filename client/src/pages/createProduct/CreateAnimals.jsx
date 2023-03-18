@@ -11,13 +11,12 @@ import { BiChevronDown } from 'react-icons/bi';
 import LoadingBox from '../../components/LoadingBox';
 import './create.css';
 
-const createToastSuccess = () =>
-  toast.success('Product successfully created!');
+const createToastSuccess = () => toast.success('Product successfully created!');
 const createToastFail = () =>
   toast.error('Sorry! Product unsuccessfully created!');
 const createToastMaxLimit = () => toast('Max limit is 10MB on each file!');
 
-export default function CreateAgroIndustry(props) {
+export default function CreateAnimals(props) {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [name, setName] = useState('');
@@ -255,14 +254,28 @@ export default function CreateAgroIndustry(props) {
           ))}
         </div>
         {loadingCreate && <LoadingBox></LoadingBox>}
-        <Button
-          size="large"
-          color="secondary"
-          type="submit"
-          disabled={loadingCreate ? true : false}
-        >
-          Create
-        </Button>
+        {imagesPreview.length === 0 ? (
+          <>
+            <p>Please upload images to create a product!</p>
+            <Button
+              color="secondary"
+              className="mb-4"
+              disabled={loadingCreate ? true : false}
+            >
+              Create
+            </Button>
+          </>
+        ) : (
+          <Button
+            size="large"
+            color="secondary"
+            type="submit"
+            className="mb-4 mt-3"
+            disabled={loadingCreate ? true : false}
+          >
+            Create
+          </Button>
+        )}
       </Form>
     </div>
   );
