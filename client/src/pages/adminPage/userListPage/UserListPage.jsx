@@ -33,7 +33,7 @@ export default function UserListScreen(props) {
     }
   };
   return (
-    <div className='main-listusers'>
+    <div className="main-listusers">
       <h1>Users</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
@@ -51,8 +51,8 @@ export default function UserListScreen(props) {
               <th className="userlist-id">ID</th>
               <th className="name-id">NAME</th>
               <th>EMAIL</th>
-              <th className='userlist-isSeller'>IS SELLER</th>
-              <th className='userlist-isAdmin'>IS ADMIN</th>
+              <th className="userlist-isSeller">IS SELLER</th>
+              <th className="userlist-isAdmin">IS ADMIN</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -62,17 +62,25 @@ export default function UserListScreen(props) {
                 <td className="userlist-id">{user._id}</td>
                 <td className="name-id">{user.name}</td>
                 <td>{user.email}</td>
-                <td className='userlist-isSeller'>{user.isSeller ? 'YES' : ' NO'}</td>
-                <td className='userlist-isAdmin'>{user.isAdmin ? 'YES' : 'NO'}</td>
+                <td className="userlist-isSeller">
+                  {user.isSeller ? 'YES' : ' NO'}
+                </td>
+                <td className="userlist-isAdmin">
+                  {user.isAdmin ? 'YES' : 'NO'}
+                </td>
                 <td>
-                  <BiPencil
-                    className="icon-size"
-                    onClick={() => navigate(`/user/${user._id}/edit`)}
-                  />
-                  <BiTrash
-                    className="icon-size"
-                    onClick={() => deleteHandler(user)}
-                  />
+                  {user.email === 'demo@example.com' ? null : (
+                    <>
+                      <BiPencil
+                        className="icon-size"
+                        onClick={() => navigate(`/user/${user._id}/edit`)}
+                      />
+                      <BiTrash
+                        className="icon-size"
+                        onClick={() => deleteHandler(user)}
+                      />
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
