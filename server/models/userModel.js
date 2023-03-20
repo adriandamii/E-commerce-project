@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,12 +14,21 @@ const userSchema = new mongoose.Schema(
       name: String,
       description: String,
     },
-    resetPasswordToken: String,
-    resetPasswordExpire: Date,
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    verifytoken: {
+      type: String,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 userSchema.methods.getJWTToken = function () {
@@ -30,13 +39,13 @@ userSchema.methods.getJWTToken = function () {
 
 userSchema.methods.getResetPasswordToken = function () {
   // Generating Token
-  const resetToken = crypto.randomBytes(20).toString("hex");
+  const resetToken = crypto.randomBytes(20).toString('hex');
 
   // Hashing and adding resetPasswordToken to userSchema
   this.resetPasswordToken = crypto
-    .createHash("sha256")
+    .createHash('sha256')
     .update(resetToken)
-    .digest("hex");
+    .digest('hex');
 
   this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 

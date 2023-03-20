@@ -5,10 +5,50 @@ const { User } = require('../models/userModel.js');
 const { generateToken, isAdmin, isAuth } = require('../utils.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const crypto = require("crypto");
 
 const userRouter = express.Router();
+const keysecret = process.env.SECRET_KEY || 'somethingsecret';
 
+//send emails tool
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  secure: false,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
+
+//upload image tool
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + file.originalname);
+  },
+});
+const fileFilter = (req, file, cb) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    return cb(res.status(400).end('Only jpeg, jpg, png are allowed', false));
+  }
+};
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter,
+});
+
+//get users
 userRouter.get(
   '/',
   isAuth,
@@ -29,6 +69,7 @@ userRouter.get(
   })
 );
 
+//login
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -50,148 +91,7 @@ userRouter.post(
   })
 );
 
-// userRouter.post(
-//   '/register',
-//   expressAsyncHandler(async (req, res) => {
-//     const user = new User({
-//       name: req.body.name,
-//       email: req.body.email,
-//       password: bcrypt.hashSync(req.body.password, 8),
-//     });
-//     const createdUser = await user.save();
-//     res.send({
-//       _id: createdUser._id,
-//       name: createdUser.name,
-//       email: createdUser.email,
-//       isAdmin: createdUser.isAdmin,
-//       isSeller: user.isSeller,
-//       token: generateToken(createdUser),
-//     });
-//   })
-// );
-
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  secure: false,
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
-
-const multer = require('multer');
-const ErrorHandler = require('../utils/errorhander.js');
-const sendToken = require('../utils/jwtToken.js');
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './uploads/images');
-  },
-  filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + file.originalname);
-  },
-});
-
-const fileFilter = (req, file, cb) => {
-  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-  if (allowedFileTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    return cb(res.status(400).end('Only jpeg, jpg, png are allowed', false));
-  }
-};
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-  },
-  fileFilter: fileFilter,
-});
-
-userRouter.post("/password/forgot", expressAsyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
-
-  if (!user) {
-    return next(new ErrorHandler("User not found", 404));
-  }
-
-  // Get ResetPassword Token
-  const resetToken = user.getResetPasswordToken();
-
-  await user.save({ validateBeforeSave: false });
-
-  const resetPasswordUrl = `http://localhost:3000/password/reset/${resetToken}`;
-
-  const mail = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
-
-  try {
-    let mailOptions = {
-      from: '"NodeMailer" <adriandamiii@gmail.com>',
-      to: user.email,
-      subject: 'Forgot Password',
-      html: mail,
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-    });
-
-    res.status(200).json({
-      success: true,
-      message: `Email sent to ${user.email} successfully`,
-    });
-  } catch (error) {
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
-
-    await user.save({ validateBeforeSave: false });
-
-    return next(new ErrorHandler(error.message, 500));
-  }
-})
-);
-// Reset Password
-userRouter.put("/password/reset/:token", expressAsyncHandler(async (req, res, next) => {
-  // creating token hash
-  const resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
-
-  const user = await User.findOne({
-    resetPasswordToken,
-    resetPasswordExpire: { $gt: Date.now() },
-  });
-
-  if (!user) {
-    return next(
-      new ErrorHandler(
-        "Reset Password Token is invalid or has been expired",
-        400
-      )
-    );
-  }
-
-  if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHandler("Password does not password", 400));
-  }
-
-  user.password = req.body.password;
-  user.resetPasswordToken = undefined;
-  user.resetPasswordExpire = undefined;
-
-  await user.save();
-
-  sendToken(user, 200, res);
-})
-);
-
-
+//register and send email
 userRouter.post(
   '/register',
   upload.single('registerImage'),
@@ -255,18 +155,18 @@ userRouter.post(
           <p>Welcome to the Adrian's Market</p>
           <h3>Please click on given link to activate your account</h3>
           <a
-                  class="reset-btn"
-                  style="
-                    color: rgb(68, 68, 68);
-                    font-weight: 900;
-                    text-decoration: none;
-                    text-transform: uppercase;
-                  "
-                  target="blank"
-                  href="${activationDeployTest}"
-                >
-                  Activation Link
-                </a>     
+            class="reset-btn"
+            style="
+              color: rgb(68, 68, 68);
+              font-weight: 900;
+              text-decoration: none;
+              text-transform: uppercase;
+            "
+            target="blank"
+            href="${activationDeployTest}"
+          >
+            Activation Link
+          </a>     
           `;
 
       let mailOptions = {
@@ -290,6 +190,7 @@ userRouter.post(
   })
 );
 
+//activation of the account
 userRouter.post(
   '/email-activate',
   expressAsyncHandler(async (req, res) => {
@@ -337,6 +238,118 @@ userRouter.post(
   })
 );
 
+// send email Link For reset Password
+userRouter.post(
+  '/sendpasswordlink',
+  expressAsyncHandler(async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+      res.status(401).json({ status: 401, message: 'Enter Your Email' });
+    }
+
+    try {
+      const userfind = await User.findOne({ email: email });
+
+      // token generate for reset password
+      const token = jwt.sign({ _id: userfind._id }, keysecret, {
+        expiresIn: '900s',
+      });
+
+      const setusertoken = await User.findByIdAndUpdate(
+        { _id: userfind._id },
+        { verifytoken: token },
+        { new: true }
+      );
+
+      let resetDeployTest = `https://market-place-project-8bem.onrender.com/resetPassword/${userfind.id}/${setusertoken.verifytoken}`;
+      let resetUrl = `http://localhost:3000/resetPassword/${userfind.id}/${setusertoken.verifytoken}`;
+
+      if (setusertoken) {
+        const mailOptions = {
+          from: process.env.EMAIL,
+          to: email,
+          subject: 'Password Reset',
+          html: `
+        <p> Hello ${userfind.name}, </p>
+        <p>Welcome to the Market Place</p>
+        <h3>Please click on given link to reset your passwordt</h3>
+        <a
+          class="reset-btn"
+          style="
+            color: rgb(68, 68, 68);
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+          "
+          target="blank"
+          href="${resetDeployTest}"
+        >
+          Reset Password Link
+        </a>     
+        `,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log('error', error);
+            res.status(401).json({ status: 401, message: 'email not send' });
+          } else {
+            res
+              .status(201)
+              .json({ status: 201, message: 'Email sent Successfully' });
+          }
+        });
+      }
+    } catch (error) {
+      res.status(401).json({ status: 401, message: 'invalid user' });
+    }
+  })
+);
+
+// verify user for forgot password time
+userRouter.get('/forgotpassword/:id/:token', async (req, res) => {
+  const { id, token } = req.params;
+
+  try {
+    const validuser = await User.findOne({ _id: id, verifytoken: token });
+    const verifyToken = jwt.verify(token, keysecret);
+    if (validuser && verifyToken._id) {
+      res.status(201).json({ status: 201, validuser });
+    } else {
+      res.status(401).json({ status: 401, message: 'user not exist' });
+    }
+  } catch (error) {
+    res.status(401).json({ status: 401, error });
+  }
+});
+
+// change password
+userRouter.post('/:id/:token', async (req, res) => {
+  const { id, token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const validuser = await User.findOne({ _id: id, verifytoken: token });
+    const verifyToken = jwt.verify(token, keysecret);
+
+    if (validuser && verifyToken._id) {
+      const newpassword = await bcrypt.hash(password, 12);
+      const setnewuserpass = await User.findByIdAndUpdate(
+        { _id: id },
+        { password: newpassword }
+      );
+
+      setnewuserpass.save();
+      res.status(201).json({ status: 201, setnewuserpass });
+    } else {
+      res.status(401).json({ status: 401, message: 'user not exist' });
+    }
+  } catch (error) {
+    res.status(401).json({ status: 401, error });
+  }
+});
+
+//get user by id
 userRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
@@ -348,6 +361,9 @@ userRouter.get(
     }
   })
 );
+
+
+//user profile, update to seller
 userRouter.put(
   '/profile',
   isAuth,
@@ -378,6 +394,8 @@ userRouter.put(
   })
 );
 
+
+//delete user
 userRouter.delete(
   '/:id',
   isAuth,
@@ -397,6 +415,8 @@ userRouter.delete(
   })
 );
 
+
+//update user
 userRouter.put(
   '/:id',
   isAuth,

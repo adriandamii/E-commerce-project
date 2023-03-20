@@ -57,6 +57,8 @@ import Wts from './pages/clientPage/clientCPanelItems/clientWTS/Wts';
 import AccountActivate from './pages/login-register/AccountActivate/AccountActivate';
 import RegisterPage from './pages/login-register/RegisterPage';
 import NavBottom from './components/NavBottom/NavBottom';
+import ForgotPassword from './pages/login-register/ForgotPassword';
+import PasswordReset from './pages/login-register/PasswordReset';
 
 const App = () => {
   // window.onscroll = function () {
@@ -188,6 +190,8 @@ const App = () => {
             element={<AccountActivate />}
           />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/resetPassword/:id/:token" element={<PasswordReset />} />
 
           <Route
             path="/adminpage"

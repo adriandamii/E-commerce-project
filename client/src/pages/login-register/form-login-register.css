@@ -43,3 +43,9 @@
         font-size: large;
     }
 }
+
+.submitbtn-suggestion {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}

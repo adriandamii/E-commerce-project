@@ -29,10 +29,9 @@ import {
   USER_LOADING,
   SET_CURRENT_USER,
 } from '../constants/userConstants';
-import url from './url';
 
 const checkEmail = () =>
-toast(
+  toast(
     <div>
       <span className="info-icon">
         <i className="fas fa-info-circle"></i>
@@ -41,25 +40,21 @@ toast(
     </div>
   );
 
-  const activatedSuccessfully = () =>
+const activatedSuccessfully = () =>
   toast.success(
     <div>
-      <span className="info-icon">
-      </span>{' '}
-      Account activated!
+      <span className="info-icon"></span> Account activated!
     </div>
   );
 
-
-
-  // export const register = (name, email, password) => async (dispatch) => {
-    //   dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
-    //   try {
+// export const register = (name, email, password) => async (dispatch) => {
+//   dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
+//   try {
 //     const { data } = await Axios.post('/users/register', {
-  //       name,
-  //       email,
-  //       password,
-  //     });
+//       name,
+//       email,
+//       password,
+//     });
 //     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 //     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
 //     localStorage.setItem('userInfo', JSON.stringify(data));
@@ -74,50 +69,48 @@ toast(
 //   }
 // };
 
-export const register = (userData, history, callback) => dispatch => {
-  Axios
-    .post(`/users/register`, userData)
-    .then(res => {
+export const register = (userData, history, callback) => (dispatch) => {
+  Axios.post(`/users/register`, userData)
+    .then((res) => {
       checkEmail();
       dispatch({
         type: GET_ERRORS,
-        payload: {}
-      })
+        payload: {},
+      });
       callback();
     })
-    .catch(err =>{
-      console.log("error", err)
+    .catch((err) => {
+      console.log('error', err);
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
-      })}
-    );
+        payload: err.response.data,
+      });
+    });
 };
 
-export const activateUser = (token, navigate, setStatus) => dispatch => {
-  Axios
-    .post(`/users/email-activate`, token)
+export const activateUser = (token, navigate, setStatus) => (dispatch) => {
+  Axios.post(`/users/email-activate`, token)
     .then((res) => {
       activatedSuccessfully();
-        setStatus(true);
+      setStatus(true);
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
-}
+};
 
 export const setUserLoading = () => {
   return {
-    type: USER_LOADING
+    type: USER_LOADING,
   };
 };
-export const setCurrentUser = decoded => {
+export const setCurrentUser = (decoded) => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: decoded,
   };
 };
 
@@ -255,6 +248,6 @@ export const listTopSellers = () => async (dispatch) => {
 export const cleanErrors = () => {
   return {
     type: GET_ERRORS,
-    payload: {}
-  }
-}
+    payload: {},
+  };
+};

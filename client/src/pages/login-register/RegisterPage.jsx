@@ -3,6 +3,7 @@ import './form-login-register.css';
 import { connect } from 'react-redux';
 import { register, cleanErrors } from '../../actions/userActions';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const RegisterPage = (props) => {
   const [registerUsername, setregisterUsername] = useState('');
@@ -93,6 +94,9 @@ const RegisterPage = (props) => {
         <Button variant="dark" onClick={submitRegister}>
           Register
         </Button>
+        <div>
+          <Link to={'/signin'}>Already have an account?</Link>
+        </div>
       </form>
     </div>
   );
