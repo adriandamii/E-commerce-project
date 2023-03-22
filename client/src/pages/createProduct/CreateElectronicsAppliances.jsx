@@ -382,7 +382,7 @@ export default function CreateElectronicsAppliances(props) {
                         <Link
                           to={'/createProduct/electronicsAppliances'}
                           onClick={() => {
-                            setBrand(brand);
+                            setBrand(c);
                           }}
                           key={index}
                           style={{ textDecoration: 'none' }}
@@ -409,7 +409,7 @@ export default function CreateElectronicsAppliances(props) {
                         <Link
                           to={'/createProduct/electronicsAppliances'}
                           onClick={() => {
-                            setRezolution(rezolution);
+                            setRezolution(c);
                           }}
                           key={index}
                           style={{ textDecoration: 'none' }}
@@ -669,7 +669,7 @@ export default function CreateElectronicsAppliances(props) {
             )}
             {subCategorySelect === 'NintendoWii' && (
               <section className="mainCategoryCreate">
-                <label className="mb-1">Storage Type</label>
+                <label className="mb-1">Model</label>
                 <div className="dropdown" controlid="mainCategory">
                   <button className="dropbtn" type="button">
                     {model === '' ? 'Select Model' : addUpperSpace(model)}

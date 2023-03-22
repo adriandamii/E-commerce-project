@@ -12,16 +12,15 @@ import MessageBox from '../../../components/MessageBox';
 import {
   PRODUCT_DELETE_RESET,
 } from '../../../constants/productConstants';
-import './productListPage.css';
 
-export default function ProductListScreen(props) {
+export default function ViewUserProducts() {
   const navigate = useNavigate();
   const { pageNumber = 1 } = useParams();
+  let userID = useParams();
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const productsList = useSelector((state) => state.productsList);
   const { loading, error, products, page, pages } = productsList;
-
   const deletedProduct = useSelector((state) => state.deletedProduct);
   const {
     loading: loadingDelete,
@@ -31,45 +30,35 @@ export default function ProductListScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
-  console.log(sellerMode);
+
   useEffect(() => {
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(
-      getProducts({ seller: sellerMode ? userInfo._id : '', pageNumber })
+      getProducts({ seller: sellerMode ? userID.id : '', pageNumber })
     );
-  }, [dispatch, navigate, sellerMode, successDelete, userInfo._id, pageNumber]);
+  }, [
+    dispatch,
+    navigate,
+    sellerMode,
+    successDelete,
+    userInfo._id,
+    pageNumber,
+    userID
+  ]);
   const deleteHandler = (product) => {
     if (window.confirm('Are you sure to delete?')) {
       dispatch(deleteProduct(product._id));
     }
   };
-  const createHandler = () => {
-    navigate('/createProduct');
-  };
-
   const addUpperSpace = (str) => {
     str = str.charAt(0).toUpperCase() + str.slice(1);
     return str.replace(/[A-Z]/g, ' $&').trim();
   };
 
   return (
-    <div className="main-product-list">
-      <div className="row">
-        <h1>Products</h1>
-        <div>
-          <Button
-            variant="info"
-            type="button"
-            className="primary"
-            onClick={createHandler}
-          >
-            Create Product
-          </Button>
-        </div>
-      </div>
-
+    <div className='main-product-list'>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
 
@@ -100,19 +89,17 @@ export default function ProductListScreen(props) {
                   {/* <td>{product.seller.seller.name}</td> */}
 
                   <td className="actions">
-                    <BiPencil
-                      className="icon-size"
-                      onClick={() =>
-                        navigate(
-                          `/${product._id}/editProduct/${product.mainCategory}`
-                        )
-                      }
-                    />
-                    &nbsp;&nbsp;
-                    <BiTrash
-                      className="icon-size"
-                      onClick={() => deleteHandler(product)}
-                    />
+
+                  <BiPencil
+                  className="icon-size"
+                    onClick={() =>
+                      navigate(
+                        `/${product._id}/editProduct/${product.mainCategory}`
+                      )
+                    }
+                  />
+                  &nbsp;&nbsp;
+                    <BiTrash className="icon-size" onClick={() => deleteHandler(product)} />
                   </td>
                 </tr>
               ))}
@@ -123,11 +110,7 @@ export default function ProductListScreen(props) {
               <Link
                 className={x + 1 === page ? 'active' : ''}
                 key={x + 1}
-                to={
-                  !sellerMode
-                    ? `/productlist/pageNumber/${x + 1}`
-                    : `/productlist/seller/pageNumber/${x + 1}`
-                }
+                to={`/productlist/seller/${userID.id}/pageNumber/${x + 1}`}
               >
                 {x + 1}
               </Link>

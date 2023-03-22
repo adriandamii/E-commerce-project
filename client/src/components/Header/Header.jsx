@@ -97,14 +97,6 @@ const Header = (props) => {
                   <CiUser className="forth-logo" style={{color:"white"}}/>
                 </Link>
               )}
-              {userInfo && userInfo.isSeller && !userInfo.isAdmin && (
-                <Link
-                  to={'/client/accountInfo'}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <CiUser className="forth-logo" style={{color:"white"}} />
-                </Link>
-              )}
               {!userInfo && (
                 <Link to={'/signin'} style={{ textDecoration: 'none' }}>
                   <CiUser className="forth-logo" style={{color:"white"}}/>

@@ -59,6 +59,7 @@ import RegisterPage from './pages/login-register/RegisterPage';
 import NavBottom from './components/NavBottom/NavBottom';
 import ForgotPassword from './pages/login-register/ForgotPassword';
 import PasswordReset from './pages/login-register/PasswordReset';
+import ViewUserProducts from './pages/adminPage/userListPage/ViewUserProducts';
 
 const App = () => {
   // window.onscroll = function () {
@@ -209,13 +210,37 @@ const App = () => {
               </AdminRoute>
             }
           />
+           <Route
+            path="/productlist/seller/:id"
+            element={
+              <AdminRoute>
+                <ViewUserProducts />
+              </AdminRoute>
+            }
+          />
 
+          <Route
+            path="/productlist/seller/:id/pageNumber/:pageNumber"
+            element={
+              <AdminRoute>
+                <ViewUserProducts />
+              </AdminRoute>
+            }
+          />
           <Route
             path="/productlist/pageNumber/:pageNumber"
             element={
               <AdminRoute>
                 <ProductListPage />
               </AdminRoute>
+            }
+          />
+          <Route
+            path="/productlist/seller/pageNumber/:pageNumber"
+            element={
+              <SellerRoute>
+                <ProductListPage />
+              </SellerRoute>
             }
           />
           <Route

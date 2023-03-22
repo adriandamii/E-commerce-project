@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import { BiPencil, BiTrash } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { deleteUser, listUsers } from '../../../actions/userActions';
 import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { USER_DETAILS_RESET } from '../../../constants/userConstants';
 import './userListPage.css';
+import ViewUserProducts from './ViewUserProducts';
 
 export default function UserListScreen(props) {
   const navigate = useNavigate();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
+  const [userId, setUserId] = useState('');
+  const [lgShow, setLgShow] = useState(false);
 
   const userDelete = useSelector((state) => state.userDelete);
   const {
@@ -32,6 +36,11 @@ export default function UserListScreen(props) {
       dispatch(deleteUser(user._id));
     }
   };
+
+  function getUserId(user) {
+    navigate(`/productlist/seller/${user._id}`);
+  }
+
   return (
     <div className="main-listusers">
       <h1>Users</h1>
@@ -40,52 +49,55 @@ export default function UserListScreen(props) {
       {successDelete && (
         <MessageBox variant="success">User Deleted Successfully</MessageBox>
       )}
+
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="userlist-id">ID</th>
-              <th className="name-id">NAME</th>
-              <th>EMAIL</th>
-              <th className="userlist-isSeller">IS SELLER</th>
-              <th className="userlist-isAdmin">IS ADMIN</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td className="userlist-id">{user._id}</td>
-                <td className="name-id">{user.name}</td>
-                <td>{user.email}</td>
-                <td className="userlist-isSeller">
-                  {user.isSeller ? 'YES' : ' NO'}
-                </td>
-                <td className="userlist-isAdmin">
-                  {user.isAdmin ? 'YES' : 'NO'}
-                </td>
-                <td>
-                  {user.email === 'demo@example.com' ? null : (
-                    <>
-                      <BiPencil
-                        className="icon-size"
-                        onClick={() => navigate(`/user/${user._id}/edit`)}
-                      />
-                      <BiTrash
-                        className="icon-size"
-                        onClick={() => deleteHandler(user)}
-                      />
-                    </>
-                  )}
-                </td>
+        <>
+          <table className="table">
+            <thead>
+              <tr>
+                <th className="userlist-id">ID</th>
+                <th className="name-id">NAME</th>
+                <th>EMAIL</th>
+                <th className="userlist-isSeller">IS SELLER</th>
+                <th className="userlist-isAdmin">IS ADMIN</th>
+                <th>ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td className="userlist-id">{user._id}</td>
+                  <td className="name-id">{user.name}</td>
+                  <td onClick={() => getUserId(user)}>{user.email}</td>
+                  <td className="userlist-isSeller">
+                    {user.isSeller ? 'YES' : ' NO'}
+                  </td>
+                  <td className="userlist-isAdmin">
+                    {user.isAdmin ? 'YES' : 'NO'}
+                  </td>
+                  <td>
+                    {user.email === 'demo@example.com' ? null : (
+                      <>
+                        <BiPencil
+                          className="icon-size"
+                          onClick={() => navigate(`/user/${user._id}/edit`)}
+                        />
+                        <BiTrash
+                          className="icon-size"
+                          onClick={() => deleteHandler(user)}
+                        />
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
     </div>
   );

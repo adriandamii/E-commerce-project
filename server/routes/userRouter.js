@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
 const userRouter = express.Router();
-const keysecret = process.env.SECRET_KEY || 'somethingsecret';
+const keysecret = process.env.JWT_SECRET || 'somethingsecret';
 
 //send emails tool
 let transporter = nodemailer.createTransport({
