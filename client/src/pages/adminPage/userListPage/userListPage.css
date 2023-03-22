@@ -1,7 +1,11 @@
 .icon-size {
     font-size: 20px;
 }
-
+.directory-to-seller-products {
+    background-color: pink;
+    cursor:pointer;
+    text-decoration-line: underline;
+}
 
 @media only screen and (min-device-width: 200px) and (max-device-width: 700px) and (-webkit-min-device-pixel-ratio: 2) {
     .userlist-id {

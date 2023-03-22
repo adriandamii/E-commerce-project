@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { BiPencil, BiTrash } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { deleteUser, listUsers } from '../../../actions/userActions';
 import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { USER_DETAILS_RESET } from '../../../constants/userConstants';
 import './userListPage.css';
-import ViewUserProducts from './ViewUserProducts';
 
 export default function UserListScreen(props) {
   const navigate = useNavigate();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
-  const [userId, setUserId] = useState('');
-  const [lgShow, setLgShow] = useState(false);
 
   const userDelete = useSelector((state) => state.userDelete);
   const {
@@ -72,7 +68,7 @@ export default function UserListScreen(props) {
                 <tr key={user._id}>
                   <td className="userlist-id">{user._id}</td>
                   <td className="name-id">{user.name}</td>
-                  <td onClick={() => getUserId(user)}>{user.email}</td>
+                  <td className="directory-to-seller-products" onClick={() => getUserId(user)} >{user.email}</td>
                   <td className="userlist-isSeller">
                     {user.isSeller ? 'YES' : ' NO'}
                   </td>
