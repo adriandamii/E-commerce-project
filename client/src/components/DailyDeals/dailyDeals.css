@@ -1,5 +1,14 @@
 .daily-deals {
-    display:flex;
-    justify-content: center;
-    margin:25px auto;
+    width:1220px;
+    margin:0 auto;
 }
+.daily-deals h4{
+    margin:30px 0 0;
+}
+
+
+@media only screen and (min-device-width: 180px) and (max-device-width: 1219px) and (-webkit-min-device-pixel-ratio: 2) {
+    .daily-deals {
+        width:100%;
+    }
+  }

@@ -22,7 +22,7 @@ router.get(
   expressAsyncHandler(async (req, res) => {
     const featuredProduct = await Product.find({isFeatured: true})
       .sort([['_id', -1]])
-      .limit(3);
+      .limit(4);
     res.send(featuredProduct);
   })
 );
@@ -32,7 +32,7 @@ router.get(
   expressAsyncHandler(async (req, res) => {
     const exclusiveProduct = await Product.find({isExclusive: true})
       .sort([['_id', -1]])
-      .limit(3);
+      .limit(4);
     res.send(exclusiveProduct);
   })
 );
@@ -42,7 +42,7 @@ router.get(
   expressAsyncHandler(async (req, res) => {
     const dailyDealsProduct = await Product.find({ isDailyDeals: true })
       .sort([['_id', -1]])
-      .limit(3);
+      .limit(4);
     res.send(dailyDealsProduct);
   })
 );

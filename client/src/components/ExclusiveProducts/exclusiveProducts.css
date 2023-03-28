@@ -1,5 +1,16 @@
+
+
 .exclusive-products {
-    display:flex;
-justify-content: center;
-margin: 0 auto;
+    width:1220px;
+    margin:0 auto;
 }
+.exclusive-products h4{
+    margin:30px 0 0;
+}
+
+
+@media only screen and (min-device-width: 180px) and (max-device-width: 1219px) and (-webkit-min-device-pixel-ratio: 2) {
+    .exclusive-products {
+        width:100%;
+    }
+  }

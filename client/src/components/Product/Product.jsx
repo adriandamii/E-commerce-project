@@ -120,8 +120,8 @@ const Product = (props) => {
 
             <Carousel variant="dark">
               {product.images.map((img, index) => (
-                <Carousel.Item className="slide-show-image" key={index}>
-                  <img className="ad-image" src={img.url} alt={img} />
+                <Carousel.Item className="slide-show-image-product" key={index}>
+                  <img className="ad-image-product" src={img.url} alt={img} />
                 </Carousel.Item>
               ))}
             </Carousel>

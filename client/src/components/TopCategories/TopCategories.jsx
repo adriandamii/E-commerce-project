@@ -9,6 +9,8 @@ import fashion from '../../data/mainCategories/fashion.png';
 import phone from '../../data/mainCategories/phone.png';
 import './topCategories.css';
 import { Link } from 'react-router-dom';
+
+
 const TopCategories = () => {
   return (
     <div className="top-categories">

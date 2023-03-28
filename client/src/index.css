@@ -5,6 +5,9 @@ main {
   width: 1300px;
   margin: 0 auto;
 }
+body {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
 
 
@@ -13,6 +16,7 @@ main {
     contain:paint;
   }
 }
+
 @media only screen and (max-device-width: 1249px) and (-webkit-min-device-pixel-ratio: 2) {
   .app-container {
     width:100%;
@@ -70,6 +74,7 @@ main {
 }
 
 .pagination a {
+  text-decoration: none;
   border:2px solid grey;
   padding:4px;
   border-radius: 5px;

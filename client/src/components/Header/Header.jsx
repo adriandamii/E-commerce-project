@@ -36,7 +36,7 @@ const Header = (props) => {
               style={{
                 textDecoration: 'none',
                 color: 'white',
-                fontFamily: 'sans-serif',
+                fontFamily: "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
                 fontWeight: 'bold',
                 fontSize: '40px',
               }}

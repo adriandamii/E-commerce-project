@@ -219,7 +219,7 @@
 .prices {
   display: flex;
   align-items: center;
-  margin: 15px 0 0 220px;
+  margin: 15px 0 0 0;
   flex-direction: row;
   gap: 10px;
 }
