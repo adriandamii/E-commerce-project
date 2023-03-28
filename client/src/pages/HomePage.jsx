@@ -33,7 +33,7 @@ const HomePage = () => {
         .catch((error) => console.log(error));
     };
     getPostsData();
-  }, [dailyDealsArr, featuredArr, exclusiveArr]);
+  }, []);
 
   return (
     <>
