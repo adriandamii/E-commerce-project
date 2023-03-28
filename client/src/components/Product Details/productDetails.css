@@ -142,6 +142,7 @@
   width: 100%;
   height: 100%;
   display: grid;
+  margin: 0 auto;
 }
 
 .question-answer-input {
@@ -218,7 +219,7 @@
 .prices {
   display: flex;
   align-items: center;
-  margin-top: 15px;
+  margin: 15px 0 0 220px;
   flex-direction: row;
   gap: 10px;
 }

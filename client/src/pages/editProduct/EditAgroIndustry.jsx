@@ -33,6 +33,7 @@ const EditAgroIndustry = (props) => {
   const [images, setImages] = useState([]);
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
+  
   const detailedProduct = useSelector((state) => state.detailedProduct);
   const { product } = detailedProduct;
 

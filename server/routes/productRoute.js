@@ -18,6 +18,36 @@ const upload = multer({
 }).array('images');
 
 router.get(
+  '/featured',
+  expressAsyncHandler(async (req, res) => {
+    const featuredProduct = await Product.find({isFeatured: true})
+      .sort([['_id', -1]])
+      .limit(3);
+    res.send(featuredProduct);
+  })
+);
+
+router.get(
+  '/exclusive',
+  expressAsyncHandler(async (req, res) => {
+    const exclusiveProduct = await Product.find({isExclusive: true})
+      .sort([['_id', -1]])
+      .limit(3);
+    res.send(exclusiveProduct);
+  })
+);
+
+router.get(
+  '/dailyDeals',
+  expressAsyncHandler(async (req, res) => {
+    const dailyDealsProduct = await Product.find({ isDailyDeals: true })
+      .sort([['_id', -1]])
+      .limit(3);
+    res.send(dailyDealsProduct);
+  })
+);
+
+router.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const pageSize = 3;

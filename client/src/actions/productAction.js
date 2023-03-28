@@ -168,17 +168,6 @@ export const updateProduct =
     }
   };
 
-// export const deleteProduct = (id) => async (dispatch) => {
-//   dispatch({ type: PRODUCT_DELETE_REQUEST });
-//   try {
-//     await Axios.delete(`/products/${id}`);
-
-//     dispatch({ type: PRODUCT_DELETE_SUCCESS });
-//   } catch (error) {
-//     dispatch({ type: PRODUCT_DELETE_FAIL });
-//   }
-// };
-
 export const deleteProduct = (productId) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
   const {

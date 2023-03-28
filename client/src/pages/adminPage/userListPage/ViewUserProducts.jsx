@@ -48,7 +48,7 @@ export default function ViewUserProducts() {
     userID
   ]);
   const deleteHandler = (product) => {
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Are you sure you want to delete it?')) {
       dispatch(deleteProduct(product._id));
     }
   };
@@ -56,6 +56,10 @@ export default function ViewUserProducts() {
     str = str.charAt(0).toUpperCase() + str.slice(1);
     return str.replace(/[A-Z]/g, ' $&').trim();
   };
+
+  function getProductId(product) {
+    navigate(`/productStatus/${product._id}`);
+  }
 
   return (
     <div className='main-product-list'>
@@ -83,7 +87,7 @@ export default function ViewUserProducts() {
               {products.map((product) => (
                 <tr key={product._id}>
                   <td className="productlist-id">{product._id}</td>
-                  <td>{product.name}</td>
+                  <td onClick={() => getProductId(product)} style={{textDecoration: "underline", cursor:"pointer"}}>{product.name}</td>
                   <td>{product.price}</td>
                   <td className="category-productlist">{addUpperSpace(product.category)}</td>
                   {/* <td>{product.seller.seller.name}</td> */}

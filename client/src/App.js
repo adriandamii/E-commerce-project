@@ -60,6 +60,7 @@ import NavBottom from './components/NavBottom/NavBottom';
 import ForgotPassword from './pages/login-register/ForgotPassword';
 import PasswordReset from './pages/login-register/PasswordReset';
 import ViewUserProducts from './pages/adminPage/userListPage/ViewUserProducts';
+import StatusProduct from './pages/adminPage/productListPage/StatusProduct';
 
 const App = () => {
   // window.onscroll = function () {
@@ -215,6 +216,14 @@ const App = () => {
             element={
               <AdminRoute>
                 <ViewUserProducts />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/productStatus/:id"
+            element={
+              <AdminRoute>
+                <StatusProduct />
               </AdminRoute>
             }
           />

@@ -127,7 +127,7 @@ export default function Filters() {
     page, 
     pages,
   } = productsList;
-
+  
   const deletedProduct = useSelector((state) => state.deletedProduct);
   const {
     //error: errorDelete,

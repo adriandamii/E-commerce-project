@@ -5,6 +5,9 @@ const productSchema = mongoose.Schema(
     //general
     name: { type: String, required: false },
     seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
+    isDailyDeals: { type: Boolean, default: false, required: true },
+    isFeatured: { type: Boolean, default: false, required: true },
+    isExclusive: { type: Boolean, default: false, required: true },
     mainCategory: { type: String, required: false },
     category: { type: String, required: false },
     subCategory: { type: String, required: false },
