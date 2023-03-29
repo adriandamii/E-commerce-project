@@ -56,25 +56,13 @@ import ClientInformation from './pages/clientPage/clientCPanelItems/clientInform
 import Wts from './pages/clientPage/clientCPanelItems/clientWTS/Wts';
 import AccountActivate from './pages/login-register/AccountActivate/AccountActivate';
 import RegisterPage from './pages/login-register/RegisterPage';
-import NavBottom from './components/NavBottom/NavBottom';
 import ForgotPassword from './pages/login-register/ForgotPassword';
 import PasswordReset from './pages/login-register/PasswordReset';
 import ViewUserProducts from './pages/adminPage/userListPage/ViewUserProducts';
 import StatusProduct from './pages/adminPage/productListPage/StatusProduct';
 
 const App = () => {
-  // window.onscroll = function () {
-  //   var currentScrollPos = window.pageYOffset;
-  //   if (currentScrollPos === 0) {
-  //     document.getElementById('navbar').style.display = 'none';
-  //   }
-  //   if (currentScrollPos > 120) {
-  //     document.getElementById('navbar').style.top = '0';
-  //     document.getElementById('navbar').style.display = 'flex';
-  //   } else {
-  //     document.getElementById('navbar').style.top = '-70px';
-  //   }
-  // };
+
   return (
     <div className="app-container">
       <Header />
