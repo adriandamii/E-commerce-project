@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { BiPencil, BiTrash } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,6 @@ import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { PRODUCT_DELETE_RESET } from '../../../constants/productConstants';
 import './productListPage.css';
-import StatusProduct from './StatusProduct';
 
 export default function ProductListScreen(props) {
   const navigate = useNavigate();
