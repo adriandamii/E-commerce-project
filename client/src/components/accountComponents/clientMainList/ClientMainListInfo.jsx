@@ -7,7 +7,6 @@ import {
   FaPeopleArrows,
   FaSearchPlus,
   FaRegQuestionCircle,
-  FaBoxes,
   FaCartArrowDown,
 } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';

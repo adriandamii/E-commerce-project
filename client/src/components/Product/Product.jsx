@@ -4,37 +4,21 @@ import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../actions/productAction';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { BiPencil, BiTrash } from 'react-icons/bi';
-import MuiAlert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
-import Popup from 'reactjs-popup';
 import euro from '../../data/euro.png';
 import ProductSpecifications from '../Product Details/ProductSpecifications';
 import './product.css';
 import { addItemShoppingBasket } from '../../reducers/cartReducer';
-import { display } from '@mui/system';
 
 const deleteToast = () => toast.success('Successfully deleted!');
 
 const Product = (props) => {
   const navigate = useNavigate();
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  });
-
-  const { vertical, horizontal, open } = state;
 
   const [show, setShow] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
 
   const { product, setPromoteProduct } = props;
-  const shoppingBasketList = useSelector(
-    (state) => state.addItemShoppingBasket
-  );
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -49,23 +33,9 @@ const Product = (props) => {
     setShowDelete(false);
   };
 
-  const deleteHandler = () => {
-    setShowDelete(true);
-  };
-
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
-
-  const handleCloseMessage = () => {
-    setState({ ...state, open: false });
-  };
-
   const [isOpen, setIsOpen] = useState(false);
 
-  const findItem = shoppingBasketList?.find?.(
-    (item) => item?.id === product?._id
-  );
+
 
   const productObject = {
     im: product?.images?.[0].url,
@@ -74,16 +44,6 @@ const Product = (props) => {
     value: product?.price,
     quantity: 1,
   };
-
-  const message = () => (
-    <Snackbar
-      anchorOrigin={{ vertical, horizontal }}
-      open={open}
-      onClose={handleClose}
-      message="I love snacks"
-      key={vertical + horizontal}
-    />
-  );
 
   return (
     <div className="product">

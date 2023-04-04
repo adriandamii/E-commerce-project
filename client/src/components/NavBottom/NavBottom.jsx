@@ -1,17 +1,11 @@
 import { BiCategory } from 'react-icons/bi';
-import { CiSearch } from 'react-icons/ci';
 import { CiShoppingBasket } from 'react-icons/ci';
 import { AiOutlineMenu } from 'react-icons/ai';
 import './navBottom.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 const NavBottom = (props) => {
-  const {setIsPressed} = props;
 
-  const handlePress = () => {
-    setIsPressed(true);
-  };
   
   return (
     <div className="nav-bottom">

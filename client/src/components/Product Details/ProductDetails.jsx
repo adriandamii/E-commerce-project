@@ -41,8 +41,6 @@ const ProductDetails = (props) => {
     }
   };
 
-  const items = useSelector((state) => state.shoppin);
-
   return (
     <div className="product-page-details">
       <div className="product-data-details">
