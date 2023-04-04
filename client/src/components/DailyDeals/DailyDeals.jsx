@@ -19,11 +19,11 @@ const DailyDeals = () => {
   return (
     <div className='daily-deals'>
       <h4>Daily deals</h4> 
-      <div className="product-list">
+      {/* <div className="product-list">
         {dailyDealsArr.map((product, index) => (
           <Product key={index} product={product} />
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }

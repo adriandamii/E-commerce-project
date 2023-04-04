@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Product from '../Product/Product';
 import './exclusiveProducts.css';
-
 
 const ExclusiveProducts = () => {
   const [exclusiveArr, setExclusiveArr] = useState([]);
@@ -17,15 +16,15 @@ const ExclusiveProducts = () => {
     getPostsData();
   }, []);
   return (
-    <div className='exclusive-products'>
-     <h4>Exclusive Products</h4>
-     <div className="product-list">
+    <div className="exclusive-products">
+      <h4>Exclusive Products</h4>
+      {/* <div className="product-list">
         {exclusiveArr.map((product, index) => (
           <Product key={index} product={product} />
         ))}
-      </div>
+      </div> */}
     </div>
-  )
-}
+  );
+};
 
-export default ExclusiveProducts
+export default ExclusiveProducts;
