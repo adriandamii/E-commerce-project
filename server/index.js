@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 mongoose
   .connect(process.env.MONGODB_URI, {
