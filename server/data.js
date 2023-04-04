@@ -26,6 +26,7 @@ const data = {
       password: bcrypt.hashSync('wts1', 8),
       isAdmin: false,
       isSeller: true,
+      wantProductUpdate: false,
       seller: {
         name: "want to sell1",
         description:"qwer"
@@ -37,6 +38,7 @@ const data = {
       password: bcrypt.hashSync('wts2', 8),
       isAdmin: false,
       isSeller: true,
+      wantProductUpdate: true,
       seller: {
         name: "want to sell2",
         description:"asdf"

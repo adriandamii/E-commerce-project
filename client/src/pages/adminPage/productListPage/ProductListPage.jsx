@@ -53,6 +53,9 @@ export default function ProductListScreen(props) {
   function getProductId(product) {
     if (!sellerMode) {
       navigate(`/productStatus/${product._id}`);
+    } 
+    if (sellerMode) {
+      navigate(`/wantProductUpdate/${product._id}`)
     }
   }
 
@@ -100,7 +103,6 @@ export default function ProductListScreen(props) {
                   <td className="category-productlist">
                     {addUpperSpace(product.category)}
                   </td>
-
                   <td className="actions">
                     <BiPencil
                       className="icon-size"

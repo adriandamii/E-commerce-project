@@ -60,6 +60,8 @@ import ForgotPassword from './pages/login-register/ForgotPassword';
 import PasswordReset from './pages/login-register/PasswordReset';
 import ViewUserProducts from './pages/adminPage/userListPage/ViewUserProducts';
 import StatusProduct from './pages/adminPage/productListPage/StatusProduct';
+import WantProductUpdate from './pages/adminPage/productListPage/WantProductUpdate';
+
 
 const App = () => {
 
@@ -215,6 +217,7 @@ const App = () => {
               </AdminRoute>
             }
           />
+          
 
           <Route
             path="/productlist/seller/:id/pageNumber/:pageNumber"
@@ -230,6 +233,14 @@ const App = () => {
               <AdminRoute>
                 <ProductListPage />
               </AdminRoute>
+            }
+          />
+          <Route
+            path="/wantProductUpdate/:id"
+            element={
+              <SellerRoute>
+                <WantProductUpdate />
+              </SellerRoute>
             }
           />
           <Route

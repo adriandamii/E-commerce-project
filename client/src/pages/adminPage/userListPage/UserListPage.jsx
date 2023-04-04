@@ -7,8 +7,9 @@ import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { USER_DETAILS_RESET } from '../../../constants/userConstants';
 import './userListPage.css';
+import { Badge } from 'react-bootstrap';
 
-export default function UserListScreen(props) {
+export default function UserListPage(props) {
   const navigate = useNavigate();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -68,7 +69,12 @@ export default function UserListScreen(props) {
                 <tr key={user._id}>
                   <td className="userlist-id">{user._id}</td>
                   <td className="name-id">{user.name}</td>
-                  <td className="directory-to-seller-products" onClick={() => getUserId(user)} >{user.email}</td>
+                  <td
+                    className="directory-to-seller-products"
+                    onClick={() => getUserId(user)}
+                  >
+                    {user.email}
+                  </td>
                   <td className="userlist-isSeller">
                     {user.isSeller ? 'YES' : ' NO'}
                   </td>
@@ -78,6 +84,9 @@ export default function UserListScreen(props) {
                   <td>
                     {user.email === 'demo@example.com' ? null : (
                       <>
+                      {user.wantProductUpdate &&
+                        <Badge bg="danger">1</Badge>
+                      }
                         <BiPencil
                           className="icon-size"
                           onClick={() => navigate(`/user/${user._id}/edit`)}

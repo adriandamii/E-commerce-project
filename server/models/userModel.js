@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     image: { type: String },
     isAdmin: { type: Boolean, default: false, required: true },
     isSeller: { type: Boolean, default: false, required: true },
+    wantProductUpdate: {type: Boolean, default: false, required: true},
     seller: {
       name: String,
       description: String,

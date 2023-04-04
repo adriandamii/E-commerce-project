@@ -5,6 +5,7 @@ const { User } = require('../models/userModel.js');
 const { generateToken, isAdmin, isAuth } = require('../utils.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const { Product } = require('../models/productModel.js');
 
 const userRouter = express.Router();
 const keysecret = process.env.JWT_SECRET || 'somethingsecret';
