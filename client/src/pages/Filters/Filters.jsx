@@ -807,9 +807,9 @@ export default function Filters() {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              {products.length === 0 && (
+              {/* {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
-              )}
+              )} */}
               <div className="product-list">
                 {products.map((product, index) => (
                   <Product key={index} product={product} />
