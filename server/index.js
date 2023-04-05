@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json({}));
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'https://master--vermillion-begonia-b3936b.netlify.app/'],
+    origin: ['http://localhost:3000', 'https://vermillion-begonia-b3936b.netlify.app'],
     methods: "GET, POST, PUT, DELETE"
   })
 );
