@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { signout } from '../../../../actions/userActions';
+import { useSelector } from 'react-redux';
 import AccountQuickDetails from '../../../../components/accountComponents/accountQuickDetails/AccountQuickDetails';
 import ClientMainListInfo from '../../../../components/accountComponents/clientMainList/ClientMainListInfo';
 import NavBottom from '../../../../components/NavBottom/NavBottom';

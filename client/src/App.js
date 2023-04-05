@@ -38,7 +38,6 @@ import PrivateRoute from './components/Routes/PrivateRoute';
 import AdminPage from './pages/adminPage/AdminPage';
 import ProductListPage from './pages/adminPage/productListPage/ProductListPage';
 import DashboardPage from './pages/adminPage/dashboardPage/DashboardPage';
-import OrderListPage from './pages/adminPage/orderListPage/OrderListPage';
 import SupportPage from './pages/adminPage/supportPage/SupportPage';
 import UserEditPage from './pages/adminPage/userEditPage/UserEditPage';
 import UserListPage from './pages/adminPage/userListPage/UserListPage';

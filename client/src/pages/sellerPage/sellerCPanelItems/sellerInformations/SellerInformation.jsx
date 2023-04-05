@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { signout } from '../../../../actions/userActions';
+import { useSelector } from 'react-redux';
 import AccountQuickDetails from '../../../../components/accountComponents/accountQuickDetails/AccountQuickDetails';
 import SellerMainListInfo from '../../../../components/accountComponents/sellerMainList/SellerMainListInfo';
 import './sellerInformation.css';
