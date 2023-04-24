@@ -17,6 +17,7 @@ import {
   PRODUCT_DETAILS_FAIL,
 } from '../constants/productConstants';
 import Axios from 'axios';
+import { serverUrl } from './url';
 
 export const getProducts =
   ({
@@ -90,7 +91,7 @@ export const getProducts =
     dispatch({ type: PRODUCT_LIST_REQUEST });
     try {
       const { data } = await Axios.get(
-        `https://server-market-place.onrender.com/products?pageNumber=${pageNumber}&seller=${seller}&name=${name}&mainCategory=${mainCategory}&category=${category}&subCategory=${subCategory}&model=${model}&carosery=${carosery}&groundType=${groundType}&commerceType=${commerceType}&fuel=${fuel}&furnished=${furnished}&rooms=${rooms}&steeringWheel=${steeringWheel}&brand=${brand}&rezolution=${rezolution}&colour=${colour}&condition=${condition}&minPrice=${minPrice}&maxPrice=${maxPrice}&minUsefulSurface=${minUsefulSurface}&maxUsefulSurface=${maxUsefulSurface}&minYear=${minYear}&maxYear=${maxYear}&minKm=${minKm}&maxKm=${maxKm}&minEngine=${minEngine}&maxEngine=${maxEngine}&minHorsePower=${minHorsePower}&maxHorsePower=${maxHorsePower}&usefulTask=${usefulTask}&size=${size}&material=${material}&season=${season}&display=${display}&whichFor=${whichFor}&waterResistance=${waterResistance}&caseMaterial=${caseMaterial}&caseColour=${caseColour}&soleType=${soleType}&floor=${floor}&minLandArea=${minLandArea}&maxLandArea=${maxLandArea}&minBuiltArea=${minBuiltArea}&maxBuiltArea=${maxBuiltArea}&compartimentType=${compartimentType}&productType=${productType}&chargeType=${chargeType}&mountType=${mountType}&tireSize=${tireSize}&tireWidth=${tireWidth}&tireProfile=${tireProfile}&rimType=${rimType}&rimSize=${rimSize}&age=${age}&experience=${experience}&operationDistance=${operationDistance}&availability=${availability}&financePosibility=${financePosibility}&guarantee=${guarantee}&emergencyService=${emergencyService}&memoryR=${memoryR}&videoType=${videoType}&storageType=${storageType}&processorBrand=${processorBrand}`
+        `${serverUrl}/products?pageNumber=${pageNumber}&seller=${seller}&name=${name}&mainCategory=${mainCategory}&category=${category}&subCategory=${subCategory}&model=${model}&carosery=${carosery}&groundType=${groundType}&commerceType=${commerceType}&fuel=${fuel}&furnished=${furnished}&rooms=${rooms}&steeringWheel=${steeringWheel}&brand=${brand}&rezolution=${rezolution}&colour=${colour}&condition=${condition}&minPrice=${minPrice}&maxPrice=${maxPrice}&minUsefulSurface=${minUsefulSurface}&maxUsefulSurface=${maxUsefulSurface}&minYear=${minYear}&maxYear=${maxYear}&minKm=${minKm}&maxKm=${maxKm}&minEngine=${minEngine}&maxEngine=${maxEngine}&minHorsePower=${minHorsePower}&maxHorsePower=${maxHorsePower}&usefulTask=${usefulTask}&size=${size}&material=${material}&season=${season}&display=${display}&whichFor=${whichFor}&waterResistance=${waterResistance}&caseMaterial=${caseMaterial}&caseColour=${caseColour}&soleType=${soleType}&floor=${floor}&minLandArea=${minLandArea}&maxLandArea=${maxLandArea}&minBuiltArea=${minBuiltArea}&maxBuiltArea=${maxBuiltArea}&compartimentType=${compartimentType}&productType=${productType}&chargeType=${chargeType}&mountType=${mountType}&tireSize=${tireSize}&tireWidth=${tireWidth}&tireProfile=${tireProfile}&rimType=${rimType}&rimSize=${rimSize}&age=${age}&experience=${experience}&operationDistance=${operationDistance}&availability=${availability}&financePosibility=${financePosibility}&guarantee=${guarantee}&emergencyService=${emergencyService}&memoryR=${memoryR}&videoType=${videoType}&storageType=${storageType}&processorBrand=${processorBrand}`
       );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
@@ -101,7 +102,7 @@ export const detailsProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await Axios.get(`https://server-market-place.onrender.com/products/${id}`);
+    const { data } = await Axios.get(`${serverUrl}/products/${id}`);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -127,7 +128,11 @@ export const createProduct = (productData) => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     };
 
-    const { data } = await Axios.post(`https://server-market-place.onrender.com/products`, productData, config);
+    const { data } = await Axios.post(
+      `${serverUrl}/products`,
+      productData,
+      config
+    );
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
       payload: data,
@@ -150,7 +155,11 @@ export const updateProduct =
       const config = {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       };
-      const { data } = await Axios.put(`https://server-market-place.onrender.com/products/${id}`, productData, config);
+      const { data } = await Axios.put(
+        `${serverUrl}/products/${id}`,
+        productData,
+        config
+      );
       dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
     } catch (error) {
       const message =
@@ -173,7 +182,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    await Axios.delete(`https://server-market-place.onrender.com/products/${productId}`, {
+    await Axios.delete(`${serverUrl}/products/${productId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });

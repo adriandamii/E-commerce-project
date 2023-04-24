@@ -10,7 +10,6 @@ import MessageBox from '../../../components/MessageBox';
 import { USER_UPDATE_RESET } from '../../../constants/userConstants';
 import './userEditPage.css';
 
-
 export default function UserEditScreen(props) {
   const navigate = useNavigate();
   const params = useParams();
@@ -18,8 +17,8 @@ export default function UserEditScreen(props) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [isSeller, setIsSeller] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -42,8 +41,8 @@ export default function UserEditScreen(props) {
     } else {
       setName(user.name);
       setEmail(user.email);
-      setIsSeller(user.isSeller);
       setIsAdmin(user.isAdmin);
+      setIsSeller(user.isSeller);
     }
   }, [dispatch, navigate, successUpdate, user, userId]);
 

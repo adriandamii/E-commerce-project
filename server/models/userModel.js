@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false, required: true },
     isSeller: { type: Boolean, default: false, required: true },
     wantProductUpdate: {type: Boolean, default: false, required: true},
+    wantToSell: { type: Boolean, default: false, required: true },
     seller: {
       name: String,
       description: String,

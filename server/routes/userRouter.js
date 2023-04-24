@@ -83,12 +83,59 @@ userRouter.post(
           email: user.email,
           isAdmin: user.isAdmin,
           isSeller: user.isSeller,
+          wantProductUpdate: user.wantProductUpdate,
+          wantToSell: user.wantToSell,
           token: generateToken(user),
         });
         return;
       }
     }
     res.status(401).send({ message: 'Invalid email or password' });
+  })
+);
+
+//clients who want to be seller send email to the admin
+userRouter.post(
+  '/trysell',
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const mail = `
+          <p> Hello admin, </p>
+          <p>Cutarescu vrea sa fie seller</p>
+          <h3>Intra in linku de jos si vezi care e treaba cu Cutarescu</h3>
+          <a
+            class="reset-btn"
+            style="
+              color: rgb(68, 68, 68);
+              font-weight: 900;
+              text-decoration: none;
+              text-transform: uppercase;
+            "
+            target="blank"
+            href=""
+          >
+            Activation Link
+          </a>     
+          `;
+
+      let mailOptions = {
+        from: '"E-commerce Project" <adriandamiii@gmail.com>',
+        to: 'adrian.damii@yahoo.com',
+        subject: 'An user want to be a seller',
+        html: mail,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        res.status(200).json({
+          message: 'weeeeee',
+        });
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   })
 );
 
@@ -363,7 +410,6 @@ userRouter.get(
   })
 );
 
-
 //user profile, update to seller
 userRouter.put(
   '/profile',
@@ -373,6 +419,8 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.wantProductUpdate = Boolean(req.body.wantProductUpdate);
+      user.wantToSell = Boolean(req.body.wantToSell);
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
@@ -389,12 +437,13 @@ userRouter.put(
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
         isSeller: user.isSeller,
+        wantProductUpdate: user.wantProductUpdate,
+        wantToSell: user.wantToSell,
         token: generateToken(updatedUser),
       });
     }
   })
 );
-
 
 //delete user
 userRouter.delete(
@@ -416,8 +465,25 @@ userRouter.delete(
   })
 );
 
+//update user by admin
 
-//update user
+userRouter.put(
+  '/user/:id',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      user.wantProductUpdate = Boolean(req.body.wantProductUpdate);
+      user.wantToSell = Boolean(req.body.wantToSell);
+      const updatedUser = await user.save();
+      res.send({ message: 'User Updated', user: updatedUser });
+    } else {
+      res.status(404).send({ message: 'User Not Found' });
+    }
+  })
+);
+
+//update user by admin
 userRouter.put(
   '/:id',
   isAuth,
@@ -429,6 +495,9 @@ userRouter.put(
       user.email = req.body.email || user.email;
       user.isSeller = Boolean(req.body.isSeller);
       user.isAdmin = Boolean(req.body.isAdmin);
+      // user.wantProductUpdate = Boolean(req.body.wantProductUpdate);
+      // user.wantToSell = Boolean(req.body.wantToSell);
+
       // user.isAdmin = req.body.isAdmin || user.isAdmin;
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });

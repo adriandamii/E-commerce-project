@@ -26,13 +26,6 @@ app.use('/products', productRoutes);
 app.use('/users', userRouter);
 // app.use('/orders', orderRouter);
 
-
-// app.use(express.static(path.join(__dirname, '../client/build')));
-// app.get('/*', (req, res) =>
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'))
-// );
-
-
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });

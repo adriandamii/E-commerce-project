@@ -52,10 +52,10 @@ export default function ProductListScreen(props) {
   function getProductId(product) {
     if (!sellerMode) {
       navigate(`/productStatus/${product._id}`);
-    } 
-    if (sellerMode) {
-      navigate(`/wantProductUpdate/${product._id}`)
     }
+    // if (sellerMode) {
+    //   navigate(`/wantProductUpdate/${product._id}`)
+    // }
   }
 
   return (

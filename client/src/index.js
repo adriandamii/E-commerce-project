@@ -5,7 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import store from './storeState';
 import './index.css';
 import App from './App';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -14,10 +14,10 @@ root.render(
   <Provider store={store}>
     <Toaster />
     <HelmetProvider>
-      <HashRouter>
+      <BrowserRouter>
       <ScrollToTop/>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </HelmetProvider>
   </Provider>
 );

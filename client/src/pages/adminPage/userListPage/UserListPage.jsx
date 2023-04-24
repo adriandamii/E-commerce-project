@@ -7,7 +7,6 @@ import LoadingBox from '../../../components/LoadingBox';
 import MessageBox from '../../../components/MessageBox';
 import { USER_DETAILS_RESET } from '../../../constants/userConstants';
 import './userListPage.css';
-import { Badge } from 'react-bootstrap';
 
 export default function UserListPage(props) {
   const navigate = useNavigate();
@@ -66,7 +65,7 @@ export default function UserListPage(props) {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user._id}>
+                <tr key={user._id}  className={user.wantToSell && !user.isSeller ? 'user-list' : null}>
                   <td className="userlist-id">{user._id}</td>
                   <td className="name-id">{user.name}</td>
                   <td
@@ -84,9 +83,9 @@ export default function UserListPage(props) {
                   <td>
                     {user.email === 'demo@example.com' ? null : (
                       <>
-                      {user.wantProductUpdate &&
+                      {/* {user.wantProductUpdate &&
                         <Badge bg="danger">1</Badge>
-                      }
+                      } */}
                         <BiPencil
                           className="icon-size"
                           onClick={() => navigate(`/user/${user._id}/edit`)}

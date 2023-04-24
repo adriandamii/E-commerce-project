@@ -61,9 +61,7 @@ import ViewUserProducts from './pages/adminPage/userListPage/ViewUserProducts';
 import StatusProduct from './pages/adminPage/productListPage/StatusProduct';
 import WantProductUpdate from './pages/adminPage/productListPage/WantProductUpdate';
 
-
 const App = () => {
-
   return (
     <div className="app-container">
       <Header />
@@ -200,7 +198,7 @@ const App = () => {
               </AdminRoute>
             }
           />
-           <Route
+          <Route
             path="/productlist/seller/:id"
             element={
               <AdminRoute>
@@ -216,7 +214,6 @@ const App = () => {
               </AdminRoute>
             }
           />
-          
 
           <Route
             path="/productlist/seller/:id/pageNumber/:pageNumber"
@@ -306,7 +303,7 @@ const App = () => {
               </SellerRoute>
             }
           />
-           <Route
+          <Route
             path="/seller/help"
             element={
               <PrivateRoute>
@@ -410,7 +407,6 @@ const App = () => {
       </main>
       <Footer />
       {/* <NavBottom /> */}
-
     </div>
   );
 };

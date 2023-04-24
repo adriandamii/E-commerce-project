@@ -70,13 +70,10 @@ const ClientMainListInfo = (props) => {
             Help/Contact Us
           </li>
         </Link>
-        <Link
-          to={'/sell'}
-          style={{ textDecoration: 'none', color: 'black' }}
-        >
+        <Link to={`/sell`} style={{ textDecoration: 'none', color: 'black' }}>
           <li>
             <FaCartArrowDown />
-            Sell with MetaQuantum
+            Sell with us
           </li>
         </Link>
         <Link

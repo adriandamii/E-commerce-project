@@ -23,7 +23,7 @@ import ad from '../../data/banner.jpg';
 import { Content, Tab, Tabs } from './tab';
 import './productDetails.css';
 import {addItemShoppingBasket} from "../../reducers/cartReducer";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 const ProductDetails = (props) => {
   const { product, active, ref, setActive } = props;

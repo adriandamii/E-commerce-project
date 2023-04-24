@@ -1,4 +1,3 @@
-module.exports = {
-    clientURL: 'http://localhost:3000',
-    serverURL: 'http://localhost:5000' 
-};
+let localServerUrl = `http://localhost:5000`;
+let publicServerUrl = 'https://server-market-place.onrender.com';
+export const serverUrl = publicServerUrl;

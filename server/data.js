@@ -27,6 +27,7 @@ const data = {
       isAdmin: false,
       isSeller: true,
       wantProductUpdate: false,
+      wantToSell: false,
       seller: {
         name: "want to sell1",
         description:"qwer"
@@ -39,6 +40,7 @@ const data = {
       isAdmin: false,
       isSeller: true,
       wantProductUpdate: true,
+      wantToSell: false,
       seller: {
         name: "want to sell2",
         description:"asdf"
@@ -50,6 +52,8 @@ const data = {
       password: bcrypt.hashSync('wtb1', 8),
       isAdmin: false,
       isSeller: false,
+      wantProductUpdate: false,
+      wantToSell: true,
       seller: {
         name: "want to buy1",
         description:"aaa"
@@ -61,6 +65,8 @@ const data = {
       password: bcrypt.hashSync('wtb2', 8),
       isAdmin: false,
       isSeller: false,
+      wantProductUpdate: false,
+      wantToSell: true,
       seller: {
         name: "want to buy2",
         description:"bbb"

@@ -9,6 +9,8 @@ const generateToken = (user) => {
       email: user.email,
       isAdmin: user.isAdmin,
       isSeller: user.isSeller,
+      wantProductUpdate: user.wantProductUpdate,
+      wantToSell: user.wantToSell,
     },
     process.env.JWT_SECRET || 'somethingsecret',
     {
@@ -132,7 +134,6 @@ module.exports = {
   isAuth,
   isAdmin,
   isSeller,
-  //mailgun,
   isSellerOrAdmin,
   payOrderEmailTemplate,
 };
